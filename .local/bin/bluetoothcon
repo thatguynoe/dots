@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Search for paired devices
+devices=$(bluetoothctl devices | cut -d' ' -f 3-)
+[[ "$devices" = "" ]] && exit 1
+
+# Prompt for device selection
+chosen=$(echo "$devices" | dmenu -i -p "Connect to which device?")
+chosen_add=$(bluetoothctl devices | grep -w "$chosen" | awk '{print $2}')
+
+# Connect to device
+(bluetoothctl connect "$chosen_add") && (notify-send "Connected to $chosen")
+
+# Update dwmblocks
+kill -44 $(pidof dwmblocks)

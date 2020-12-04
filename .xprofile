@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical session.
+
+# Autostart Pulseaudio if installed and not already started by init.
+[ -x /usr/bin/pulseaudio ] &&
+    ! pidof pulseaudio >/dev/null &&
+    setsid -f pulseaudio --start >/dev/null 2>&1
+
+dwmblocks &             # statusbar
+mpd &                   # music player daemon
+remaps &                # run the remaps script, switching caps/esc and more
+setbg &                 # set the background with the `setbg` script
+dunst &                 # enables desktop notifications
+xcompmgr &              # for terminal transparency
+unclutter &             # remove mouse when idle
+xbanish -i mod4 &       # remove mouse when typing
+numlockx &              # remember numlock
+redshift &              # provides redshift in screen in the evening

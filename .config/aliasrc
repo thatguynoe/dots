@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+    cp="cp -iv" \
+    mv="mv -iv" \
+    rm="rm -vI" \
+    mkd="mkdir -pv" \
+    yt="youtube-dl --add-metadata -i" \
+    yta="yt -x -f bestaudio/best" \
+    ffmpeg="ffmpeg -hide_banner"
+
+# Colorize commands when possible.
+alias \
+    ls="ls --color=auto -hN --group-directories-first" \
+    grep="grep --color=auto" \
+    diff="diff --color=auto" \
+    ccat="highlight --out-format=ansi"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+    ka="killall" \
+    g="git" \
+    sdn="sudo shutdown -h now" \
+    os="onedrive --synchronize" \
+    scan="hp-scan --size=letter --dest=pdf" \
+    mp="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merge.pdf" \
+    p="sudo pacman" \
+    z="zathura" \
+    f="$FILE" \
+    e="$EDITOR" \
+    v="$EDITOR"
+
+# Shorten some common curl commands.
+alias \
+    we="curl wttr.in" \
+    wee="curl v2.wttr.in" \
+    iplocate="curl ifconfig.co"
+    # we="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"

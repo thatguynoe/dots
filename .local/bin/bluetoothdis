@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Disconnect currently connected device
+(bluetoothctl disconnect) && (notify-send "Disconnected from device")
+
+# Restart pulseaudio and update dwmblocks
+pulseaudio --start; kill -44 $(pidof dwmblocks)

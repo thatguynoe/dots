@@ -1,0 +1,86 @@
+# Basic Settings
+set shell zsh
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set period 1
+set incsearch on
+set tabstop 4
+set drawbox on
+set findlen 0
+set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:run.xml:lost+found"
+
+# Set previewer
+# $lf -remote "send $id set previewer $XDG_CONFIG_HOME/lf/scope"
+
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
+            text/*) $EDITOR $fx;;
+            text/docx) libreoffice $fx >/dev/null 2>&1;;
+        image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
+        image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+        audio/*) mpv --audio-display=no $f ;;
+        video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+            *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+    esac
+}}
+
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+
+cmd setbg "$1"
+cmd bulkrename $vidir
+
+# Unmappings
+map m
+map c
+
+# General Mappings
+map <c-f> $lf -remote "send $id select '$(fzf)'"
+map D delete
+
+map md push :mkdir<space>
+map <c-r> reload
+map <enter> shell
+map o open
+map cd push :cd<space>
+map X :$atool -x $f
+map Z :&tar -cvzf $f.tar.gz $s
+map x :&chmod +x $fx
+
+map tU !clear && du --max-depth=1 -h --apparent-size
+map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
+
+map <c-l> clear
+map V push :$nvim<space>
+map b $setbg $f
+
+# Renaming
+map r rename # at the very end
+map cw push r<c-u> # new rename
+map I push r<c-a> # at the very beginning
+map a push r<a-b><a-b><a-f> # before extention
+map A push r<a-b> # after extention
+map B bulkrename
+
+# Movement
+map gg top
+map J half-down
+map K half-up
+map <c-y> up
+map <c-e> down
+
+# Directory Shortcuts
+map gh cd ~/
+map gd cd ~/Downloads
+map gD cd ~/Documents
+map gp cd ~/Pictures
+map gm cd ~/Music
+map gcf cd ~/.config
+map glc cd ~/.local
+
+map god cd ~/OneDrive/Documents
+map gou cd ~/OneDrive/Documents/University
+map gof cd ~/OneDrive/Documents/University/Fall\ 2020
+
+map gr cd /

@@ -1,0 +1,16 @@
+# vim: filetype=sh
+alias h="cd $HOME && ls -a" \
+d="cd ${XDG_DOWNLOAD_DIR:-$HOME/Downloads} && ls -a" \
+D="cd ${XDG_DOCUMENTS_DIR:-$HOME/Documents} && ls -a" \
+pp="cd ${XDG_PICTURES_DIR:-$HOME/Pictures} && ls -a" \
+m="cd ${XDG_MUSIC_DIR:-$HOME/Music} && ls -a" \
+cf="cd ${XDG_CONFIG_HOME:-$HOME/.config} && ls -a" \
+dt="cd ${XDG_DATA_HOME:-$HOME/.local/share} && ls -a" \
+of="cd $HOME/OneDrive/Documents/University/Fall\ 2020 && ls -a" \
+bin="cd $HOME/.local/bin && ls -a" \
+src="cd $HOME/.local/src && ls -a" \
+mn="cd /mnt && ls -a" \
+bl="$EDITOR $HOME/OneDrive/Documents/Other/linux_setup.md" \
+cfa="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config}/aliasrc" \
+cfn="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim" \
+cfs="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc" \
