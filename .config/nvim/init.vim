@@ -82,7 +82,7 @@ call plug#end()
 
 " NVIM COMPLETION:
 " Use completion-nvim in every buffer.
-" autocmd BufEnter * lua require'completion'.on_attach()
+autocmd BufEnter * lua require'completion'.on_attach()
 
 " Use <Tab> and <S-Tab> to navigate through popup menu.
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -272,17 +272,17 @@ filetype indent off
 " NVIM LSP:
 " Note: LSP must be instantiated after your colorscheme
 lua << EOF
-    -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    --     vim.lsp.diagnostic.on_publish_diagnostics, {
-    --         virtual_text = false,
-    --         signs = true,
-    --         update_in_insert = false,
-    --     }
-    -- )
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = false,
+            signs = true,
+            update_in_insert = false,
+        }
+    )
 
-    -- require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
-    -- require'lspconfig'.texlab.setup{on_attach=require'completion'.on_attach}
-    -- require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
+    require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+    require'lspconfig'.texlab.setup{on_attach=require'completion'.on_attach}
+    require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
 EOF
 
 " LSP Mappings
