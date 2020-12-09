@@ -285,6 +285,9 @@ lua << EOF
     require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
 EOF
 
+" Show diagnostic on hover.
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+
 " LSP Mappings
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
