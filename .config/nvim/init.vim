@@ -108,6 +108,9 @@ set shortmess+=c
 " Disable LSP's hover and displays in a floating window.
 let g:completion_enable_auto_hover = 0
 
+" Set to sort by length instead of alphabet.
+let g:completion_sorting = "length"
+
 " AIRLINE:
 set noshowmode 		                                    " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
