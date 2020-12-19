@@ -236,7 +236,6 @@ let g:netrw_winsize = 20
 
 " Automatically recompile dwm/dwmblocks/st on save.
 autocmd BufWritePost config.h !sudo make install
-autocmd BufWritePost blocks.h !sudo make install
 
 " Automatically source init.vim on save (and refresh Airline).
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC | :AirlineRefresh
@@ -270,14 +269,9 @@ autocmd FileType cpp nnoremap <buffer> <silent> <A-m>
 
 " LaTeX:
 let g:vimtex_view_general_viewer = 'zathura'
-let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor = 'latex'
 
 " Turn off (on?) all autoindentation.
-" let g:tex_indent_items = 1
-" let g:tex_indent_brace = 1
-" let g:tex_indent_and = 1
-" let g:vimtex_indent_enabled = 1
 filetype indent off
 
 " NVIM LSP:
@@ -293,7 +287,6 @@ lua << EOF
 
     require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
     require'lspconfig'.texlab.setup{on_attach=require'completion'.on_attach}
-    require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
 EOF
 
 " Show diagnostic on hover.
