@@ -13,10 +13,12 @@ set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:run.xml:lost+found"
 # Set previewer
 $lf -remote "send $id set previewer $XDG_CONFIG_HOME/lf/scope"
 
+# Functions
 cmd open ${{
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
             text/*) $EDITOR $fx;;
+            application/json) $EDITOR $fx;;
             text/docx) libreoffice $fx >/dev/null 2>&1;;
         image/x-xcf|image/svg+xml) setsid -f gimp $f >/dev/null 2>&1 ;;
         image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
@@ -40,10 +42,10 @@ map <c-f> $lf -remote "send $id select '$(fzf)'"
 map D delete
 
 map md push :mkdir<space>
+map cd push :cd<space>
 map <c-r> reload
 map <enter> shell
 map o open
-map cd push :cd<space>
 map X :$atool -x $f
 map Z :&tar -cvzf $f.tar.gz $s
 map x :&chmod +x $fx
@@ -56,11 +58,10 @@ map V push :$nvim<space>
 map b $setbg $f
 
 # Renaming
-map r rename # at the very end
-map cw push r<c-u> # new rename
-map I push r<c-a> # at the very beginning
-map a push r<a-b><a-b><a-f> # before extention
-map A push r<a-b> # after extention
+map A rename # at the very end
+map cw push A<c-u> # new rename
+map I push A<c-a> # at the very beginning
+map a push A<a-b><a-b><a-f> # before extention
 map B bulkrename
 
 # Movement
@@ -81,7 +82,7 @@ map glc cd ~/.local
 
 map god cd ~/OneDrive/Documents
 map gou cd ~/OneDrive/Documents/University
-map gof cd ~/OneDrive/Documents/University/Fall\ 2020
+map gos cd ~/OneDrive/Documents/University/2020-2021/Spring\ 2021
 
 map gr cd /
 map gM cd /mnt
