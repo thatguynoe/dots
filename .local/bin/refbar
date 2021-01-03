@@ -1,5 +1,11 @@
 #!/bin/sh
+# Refresh weather, the dwmbar, and dwmblocks.
 
-# Refresh the dwmbar.
+# Refresh the moonphase and weatherreport.
+rm ${XDG_DATA_HOME:-$HOME/.local/share}/moonphase ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport &> /dev/null; moonphase &> /dev/null; weather &> /dev/null
+
 # Send SIGTRAP signal to dwmbar script, which will handle it with a trap.
 pkill -SIGTRAP dwmbar
+
+# Refresh dwmblocks.
+killall -q dwmblocks; setsid -f dwmblocks
