@@ -50,6 +50,9 @@ nnoremap <silent> <Leader>d :bdelete! <cr>
 nnoremap <silent> <Leader>bh :bprevious! <bar> bdelete! <cr>
 nnoremap <silent> <Leader>bl :bnext! <bar> bdelete! <cr>
 
+" Execute the compiler script.
+nnoremap <silent> <Leader>f :silent !compiler "%" <cr>
+
 " Goyo mapping.
 nnoremap <silent> <Leader>g :Goyo <cr>
 
@@ -261,7 +264,7 @@ autocmd FileType markdown set conceallevel=2
 " Update and compile code in terminal.
 autocmd FileType cpp nnoremap <buffer> <silent> <A-n>
     \ :update <bar>
-    \ !g++ "%" -o "%:r".out <cr>
+    \ silent !g++ "%" -o "%:r".out <cr>
 
 " Execute code in terminal.
 autocmd FileType cpp nnoremap <buffer> <silent> <A-m>
