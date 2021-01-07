@@ -24,6 +24,7 @@ alias \
 alias \
     ka="killall" \
     g="git" \
+    se="sudoedit" \
     sdn="sudo shutdown -h now" \
     os="onedrive --synchronize" \
     scan="hp-scan --size=letter --dest=pdf" \
@@ -36,8 +37,8 @@ alias \
 
 # Shorten some common curl commands.
 alias \
-    we="curl wttr.in" \
-    wee="curl v2.wttr.in" \
-    temp="curl 'wttr.in/$LOCATION?format='%t+\(%f\)''" \
+    we="curl -s 'wttr.in/?%F' | less" \
+    wee="curl -s 'v2.wttr.in/?%F' | less" \
+    temp="curl 'wttr.in/$LOCATION?format='%c%t+\(%f\)''" \
     sunset="curl 'wttr.in/$LOCATION?format=%s'" \
     iplocate="curl ifconfig.co"
