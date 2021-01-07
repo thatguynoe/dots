@@ -38,5 +38,6 @@ alias \
 alias \
     we="curl wttr.in" \
     wee="curl v2.wttr.in" \
+    temp="curl 'wttr.in/$LOCATION?format='%t+\(%f\)''" \
+    sunset="curl 'wttr.in/$LOCATION?format=%s'" \
     iplocate="curl ifconfig.co"
-    # we="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
