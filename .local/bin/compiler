@@ -35,12 +35,12 @@ case "$ext" in
     h) sudo make install ;;
     m) octave "$file" ;;
     md)	if  [ -x "$(command -v lowdown)" ]; then
-			lowdown -d nointem -e super "$file" -Tms | groff -mpdfmark -ms -kept > "$base".pdf
-	    elif [ -x "$(command -v groffdown)" ]; then
+            lowdown -d nointem -e super "$file" -Tms | groff -mpdfmark -ms -kept > "$base".pdf
+        elif [ -x "$(command -v groffdown)" ]; then
             groffdown -i "$file" | groff > "$base.pdf"
         else
             pandoc -t ms --highlight-style=kate -s -o "$base".pdf "$file"
-		fi ; ;;
+        fi ; ;;
     mom) preconv "$file" | refer -PS -e | groff -mom -kept -T pdf > "$base".pdf ;;
     ms) preconv "$file" | refer -PS -e | groff -me -ms -kept -T pdf > "$base".pdf ;;
     py) python "$file" ;;
