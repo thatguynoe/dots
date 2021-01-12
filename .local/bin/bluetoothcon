@@ -2,7 +2,7 @@
 
 # Search for paired devices
 devices=$(bluetoothctl devices | cut -d' ' -f 3-)
-[[ "$devices" = "" ]] && exit 1
+[ "$devices" = "" ] && exit 1
 
 # Prompt for device selection
 chosen=$(echo "$devices" | dmenu -i -p "Connect to which device?")
