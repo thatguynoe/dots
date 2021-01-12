@@ -17,6 +17,7 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
 export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
