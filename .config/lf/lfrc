@@ -11,7 +11,7 @@ set findlen 0
 set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:run.xml:lost+found"
 
 # Set previewer
-$lf -remote "send $id set previewer $XDG_CONFIG_HOME/lf/scope"
+set previewer ~/.config/lf/scope
 
 # Functions
 cmd open ${{
