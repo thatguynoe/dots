@@ -51,19 +51,22 @@ nnoremap <silent> <Leader>bh :bprevious! <bar> bdelete! <cr>
 nnoremap <silent> <Leader>bl :bnext! <bar> bdelete! <cr>
 
 " Execute the compiler script.
-nnoremap <silent> <Leader>f :silent !compiler "%" <cr>
+nnoremap <silent> <Leader>f :update <bar> silent !compiler "%" <cr>
+
+" Open output.
+nnoremap <silent> <Leader>j :silent !opout "%" <cr>
 
 " Goyo mapping.
 nnoremap <silent> <Leader>g :Goyo <cr>
 
 " netrw mapping.
-nnoremap <silent> <C-N> :Vex <cr>
+nnoremap <silent> <C-n> :Vex <cr>
 
 " Easier navigation of splits.
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-h> <C-w><C-h>
 
 " Easier resizing of splits.
 nnoremap <Up> <C-w>+
@@ -76,10 +79,9 @@ call plug#begin()
 
 Plug 'neovim/nvim-lspconfig'                    " neovim LSP
 Plug 'nvim-lua/completion-nvim'                 " neovim autocompletion
-Plug 'vim-airline/vim-airline'                  " statusline
-Plug 'vim-airline/vim-airline-themes'           " statusline themes
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " markdown preview
-Plug 'lervag/vimtex'			                " better LaTeX support
+Plug 'lervag/vimtex'                            " better LaTeX support
+Plug 'hoob3rt/lualine.nvim'                     " statusline
+Plug 'critiqjo/vim-bufferline'                  " bufferline
 Plug 'tpope/vim-surround'                       " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                     " better comment manipulation
 Plug 'junegunn/goyo.vim'                        " distraction free editing
@@ -100,7 +102,7 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Map <c-p> to manually trigger completion
-imap <silent> <c-p> <Plug>(completion_trigger)
+imap <silent> <C-p> <Plug>(completion_trigger)
 
 " Set completeopt to have a better completion experience.
 set completeopt=menuone,noinsert,noselect
@@ -114,28 +116,20 @@ let g:completion_enable_auto_hover = 0
 " Set to sort by length instead of alphabet.
 let g:completion_sorting = "length"
 
-" AIRLINE:
-set noshowmode 		                                    " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+" BUFFERLINE:
+let g:bufferline_echo = 1
+let g:bufferline_show_bufnr = 0
+let g:bufferline_pathshorten = 1
 
-let g:airline_theme = 'gruvbox'                         " Set theme
-let g:airline_powerline_fonts = 0                       " Disable powerline fonts
-let g:airline#extensions#tabline#enabled = 1            " Enable tabline
-let g:airline#extensions#tabline#fnamemod = ':t'        " Disable file paths in the tab
-let g:airline#extensions#tabline#tab_min_count = 2      " Minimum of 2 tabs needed to display the tabline
+" LUALINE:
+" Disables -- INSERT -- and more in the command line
+set noshowmode
 
-" Statusline seperators and symbols.
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.linenr = ''
+lua << EOF
+local lualine = require('lualine')
+    lualine.theme = 'gruvbox'
+lualine.status()
+EOF
 
 " QUICKSCOPE:
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -162,7 +156,7 @@ let g:gruvbox_invert_selection = 0
 colorscheme gruvbox
 
 " Enable (or disable) background transparency.
-" highlight Normal guibg=NONE
+highlight Normal guibg=NONE
 
 " Enable linebreaking at words, not characters.
 set linebreak
@@ -213,9 +207,6 @@ autocmd BufWritePre * %s/\s\+$//e
 " Remove swap files.
 set noswapfile
 
-" Runs a script that cleans out tex build files whenever exiting a .tex file.
-autocmd VimLeave *.tex !texclear "%"
-
 " Automatically start Goyo when writing mail and editing linux_setup.md
 autocmd BufRead,BufNewFile /tmp/neomutt*,~/OneDrive/Documents/Other/linux_setup.md :Goyo
 autocmd BufRead,BufNewFile /tmp/neomutt*,~/OneDrive/Documents/Other/linux_setup.md nmap Q :Goyo <bar> x! <cr>
@@ -240,39 +231,32 @@ let g:netrw_winsize = 20
 " Automatically recompile dwm/dwmblocks/st on save.
 autocmd BufWritePost config.h !sudo make install
 
-" Automatically source init.vim on save (and refresh Airline).
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC | :AirlineRefresh
+" Automatically source init.vim on save.
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
 " PYTHON:
 " Update and execute code in terminal.
-autocmd FileType python nnoremap <buffer> <silent> <A-m>
-    \ :update <bar>
-    \ 10sp <bar> term python "%" <cr>
+autocmd FileType python nnoremap <buffer> <silent> <Leader>f :10sp <bar> terminal python "%" <cr>
 
 let g:python_highlight_all = 1
 
 " MARKDOWN:
-" Preview code in browser.
-autocmd FileType markdown nnoremap <buffer> <silent> <A-m> :MarkdownPreview <cr>
-
-let g:mkdp_page_title = ' ${name} '
-
 " Sets cleaner output.
 autocmd FileType markdown set conceallevel=2
 
 " CPP:
 " Update and compile code in terminal.
-autocmd FileType cpp nnoremap <buffer> <silent> <A-n>
-    \ :update <bar>
-    \ silent !g++ "%" -o "%:r".out <cr>
+autocmd FileType cpp nnoremap <buffer> <silent> <Leader>f :!compiler "%" <cr>
 
 " Execute code in terminal.
-autocmd FileType cpp nnoremap <buffer> <silent> <A-m>
-    \ :10sp <bar> terminal ./"%:r".out <cr>
+autocmd FileType cpp nnoremap <buffer> <silent> <Leader>j :10sp <bar> terminal ./"%:r".out <cr>
 
 " LaTeX:
 let g:vimtex_view_general_viewer = 'zathura'
 let g:tex_flavor = 'latex'
+
+" Runs a script that cleans out tex build files whenever exiting a .tex file.
+autocmd VimLeave *.tex !texclear "%"
 
 " Turn off (on?) all autoindentation.
 filetype indent off
@@ -296,7 +280,7 @@ EOF
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " LSP Mappings
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gR    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gR <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.rename()<CR>
