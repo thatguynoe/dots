@@ -140,6 +140,16 @@ let g:lightline = {
 let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline.component = { 'filename': '%F' }
 
+" GOYO:
+function! s:goyo_leave()
+    highlight Normal guibg=NONE
+endfunction
+
+" SMOOTHIE:
+" Even smoother settings.
+let g:smoothie_update_interval = 30
+let g:smoothie_base_speed = 20
+
 " QUICKSCOPE:
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -215,10 +225,6 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Remove swap files.
 set noswapfile
-
-" Automatically start Goyo when writing mail and editing linux_setup.md
-autocmd BufRead,BufNewFile /tmp/neomutt*,~/OneDrive/Documents/Other/linux_setup.md :Goyo
-autocmd BufRead,BufNewFile /tmp/neomutt*,~/OneDrive/Documents/Other/linux_setup.md nmap Q :Goyo <bar> x! <cr>
 
 " MISCELLANEOUS:
 " Enables a global clipboard.
