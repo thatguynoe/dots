@@ -80,8 +80,8 @@ call plug#begin()
 Plug 'neovim/nvim-lspconfig'                    " neovim LSP
 Plug 'nvim-lua/completion-nvim'                 " neovim autocompletion
 Plug 'lervag/vimtex'                            " better LaTeX support
-Plug 'hoob3rt/lualine.nvim'                     " statusline
-Plug 'critiqjo/vim-bufferline'                  " bufferline
+Plug 'itchyny/lightline.vim'                    " statusline
+Plug 'mengelbrecht/lightline-bufferline'        " bufferline
 Plug 'tpope/vim-surround'                       " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                     " better comment manipulation
 Plug 'junegunn/goyo.vim'                        " distraction free editing
@@ -116,20 +116,29 @@ let g:completion_enable_auto_hover = 0
 " Set to sort by length instead of alphabet.
 let g:completion_sorting = "length"
 
-" BUFFERLINE:
-let g:bufferline_echo = 1
-let g:bufferline_show_bufnr = 0
-let g:bufferline_pathshorten = 1
-
-" LUALINE:
-" Disables -- INSERT -- and more in the command line
+" LIGHTLINE:
+" Disables -- INSERT -- and more in the command line.
 set noshowmode
 
-lua << EOF
-local lualine = require('lualine')
-    lualine.theme = 'gruvbox'
-lualine.status()
-EOF
+" Enables the tabline.
+set showtabline=2
+
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+          \ 'tabline': {
+          \   'left': [ ['buffers'] ],
+          \   'right': [],
+          \ },
+          \ 'component_expand': {
+          \   'buffers': 'lightline#bufferline#buffers'
+          \ },
+          \ 'component_type': {
+          \   'buffers': 'tabsel'
+          \ }
+      \ }
+
+let g:lightline#bufferline#min_buffer_count = 2
+let g:lightline.component = { 'filename': '%F' }
 
 " QUICKSCOPE:
 " Trigger a highlight in the appropriate direction when pressing these keys:
