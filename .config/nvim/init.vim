@@ -141,9 +141,7 @@ let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline.component = { 'filename': '%F' }
 
 " GOYO:
-function! s:goyo_leave()
-    highlight Normal guibg=NONE
-endfunction
+autocmd! User GoyoLeave nested highlight Normal guibg=NONE
 
 " SMOOTHIE:
 " Even smoother settings.
