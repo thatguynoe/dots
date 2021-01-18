@@ -16,6 +16,7 @@ set previewer ~/.config/lf/scope
 
 # Functions
 cmd open ${{
+    test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
             text/*) $EDITOR $fx;;
@@ -64,7 +65,7 @@ map p
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map D delete
 map yy copy
-map yw :$echo -n $f | tr -d '\n' | xclip -selection clipboard
+map yw :$echo -n $fx | xclip -selection clipboard
 map pp paste
 map po paste-overwrite
 
