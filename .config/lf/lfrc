@@ -8,6 +8,7 @@ set incsearch on
 set tabstop 4
 set drawbox on
 set findlen 0
+set timefmt "Mon Jan _2 2006 15:04:05"
 set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:run.xml:lost+found"
 
 # Set previewer
@@ -36,10 +37,13 @@ cmd bulkrename $vidir
 # Unmappings
 map m
 map c
+map y
 
 # General Mappings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map D delete
+map yy copy
+map yw :$echo -n $f | tr -d '\n' | xclip -selection clipboard
 
 map md push :mkdir<space>
 map cd push :cd<space>
@@ -53,9 +57,10 @@ map x :&chmod +x $fx
 map tU !clear && du --max-depth=1 -h --apparent-size
 map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
 
-map <c-l> clear
+map <c-x> clear
 map V push :$nvim<space>
 map b $setbg $f
+map `` push :mark-load<enter>'
 
 # Renaming
 map A rename # at the very end
