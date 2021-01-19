@@ -39,10 +39,10 @@ cmd paste-overwrite &{{
     [ $# -gt 0 ] || exit
     case $mode in
         copy)
-            cp -r "$@" ./
+            cp -r --remove-destination -- "$@" .
             ;;
         move)
-            mv -r --remove-source-files "$@" ./
+            mv --force -- "$@" .
             ;;
     esac
     lf -remote 'save\nmove\n'
@@ -76,7 +76,7 @@ map <enter> shell
 map o open
 map X :$atool -x $f
 map Z :&tar -cvzf $f.tar.gz $s
-map x :&chmod +x $fx
+map x :&chmod +x $fx; lf -remote "send $id reload"
 
 map tU !clear && du --max-depth=1 -h --apparent-size
 map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
