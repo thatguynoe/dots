@@ -14,6 +14,6 @@ do
             echo -n "$file" | tr -d '\n' | xclip -selection clipboard &&
             notify-send "$file copied to clipboard" & ;;
         "i")
-            notify-send "File information" "$(mediainfo "$file")" ;;
+            notify-send "File information" "$(mediainfo "$file" | tr -s ' ')" ;;
     esac
 done
