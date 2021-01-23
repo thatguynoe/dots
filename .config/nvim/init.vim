@@ -60,7 +60,10 @@ nnoremap <silent> <Leader>j :silent !opout "%" <cr>
 nnoremap <silent> <Leader>g :Goyo <cr>
 
 " netrw mapping.
-nnoremap <silent> <C-n> :Vex <cr>
+nnoremap <silent> <C-n> :Vexplore <cr>
+
+" FZF mapping.
+nnoremap <silent> <Leader>e :FZF <cr>
 
 " Easier navigation of splits.
 nnoremap <C-j> <C-w><C-j>
@@ -240,6 +243,9 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 20
+
+" Ignore some file types.
+set wildignore+=*.out,*.pdf
 
 " Automatically recompile dwm/dwmblocks/st on save.
 autocmd BufWritePost config.h !sudo make install
