@@ -10,6 +10,3 @@ chosen_add=$(bluetoothctl devices | grep -w "$chosen" | awk '{print $2}')
 
 # Connect to device
 (bluetoothctl connect "$chosen_add") && (notify-send "Connected to $chosen")
-
-# Update dwmblocks
-kill -44 $(pidof dwmblocks)
