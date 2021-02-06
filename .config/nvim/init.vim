@@ -50,6 +50,9 @@ nnoremap <silent> <Leader>d :bdelete! <cr>
 nnoremap <silent> <Leader>bh :bprevious! <bar> bdelete! <cr>
 nnoremap <silent> <Leader>bl :bnext! <bar> bdelete! <cr>
 
+" Save mapping.
+nnoremap <silent> <Leader>w :update <cr>
+
 " Execute the compiler script.
 nnoremap <silent> <Leader>f :update <bar> silent !compiler "%" <cr>
 
@@ -88,6 +91,7 @@ Plug 'mengelbrecht/lightline-bufferline'        " bufferline
 Plug 'tpope/vim-surround'                       " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                     " better comment manipulation
 Plug 'junegunn/goyo.vim'                        " distraction free editing
+Plug 'junegunn/vim-easy-align'                  " aligns text
 Plug 'unblevable/quick-scope'                   " better line navigation
 Plug 'octol/vim-cpp-enhanced-highlight'         " better c++ syntax highlighting
 Plug 'vim-python/python-syntax'                 " better python syntax highlighting
@@ -127,21 +131,40 @@ set noshowmode
 set showtabline=2
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-          \ 'tabline': {
-          \   'left': [ ['buffers'] ],
-          \   'right': [],
-          \ },
-          \ 'component_expand': {
-          \   'buffers': 'lightline#bufferline#buffers'
-          \ },
-          \ 'component_type': {
-          \   'buffers': 'tabsel'
-          \ }
-      \ }
+    \ 'colorscheme': 'gruvbox',
+        \ 'active': {
+        \   'left':[ [ 'mode', 'paste' ],
+        \            [ 'readonly', 'filename']
+        \   ]
+        \ },
+        \ 'tabline': {
+        \   'left': [ ['buffers'] ],
+        \   'right': [],
+        \ },
+        \ 'component_expand': {
+        \   'buffers': 'lightline#bufferline#buffers'
+        \ },
+        \ 'component_type': {
+        \   'buffers': 'tabsel'
+        \ },
+        \ 'component_function': {
+        \   'filename': 'LightlineFilename',
+        \ },
+        \ 'component': {
+        \   'lineinfo': ' %3l:%-2v',
+        \ },
+    \ }
 
+function! LightlineFilename()
+    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    let modified = &modified ? ' +' : ''
+    return filename . modified
+endfunction
+
+let g:lightline#bufferline#unnamed = '[No Name]'
 let g:lightline#bufferline#min_buffer_count = 2
-let g:lightline.component = { 'filename': '%F' }
+let g:lightline#bufferline#clickable = 1
+let g:lightline.component_raw = {'buffers': 1}
 
 " GOYO:
 autocmd! User GoyoLeave nested highlight Normal guibg=NONE
@@ -149,11 +172,18 @@ autocmd! User GoyoLeave nested highlight Normal guibg=NONE
 " SMOOTHIE:
 " Even smoother settings.
 let g:smoothie_update_interval = 30
-let g:smoothie_base_speed = 20
+let g:smoothie_base_speed = 30
 
 " QUICKSCOPE:
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" EASYALIGN:
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " VISUAL:
 " Enable filetype specific mappings and more.
@@ -175,7 +205,7 @@ set number relativenumber
 let g:gruvbox_invert_selection = 0
 colorscheme gruvbox
 
-" Enable (or disable) background transparency.
+" Enable background transparency.
 highlight Normal guibg=NONE
 
 " Enable linebreaking at words, not characters.
@@ -204,6 +234,9 @@ set shiftwidth=4    " Sets tabbing to 4 spaces
 " Set smarter indentation.
 set smartindent
 
+" Turn off all autoindentation.
+filetype indent off
+
 " Disable automatic comment insertion.
 autocmd FileType * setlocal formatoptions-=cro
 
@@ -217,9 +250,8 @@ set foldlevel=99
 " Allow incrementing of letters.
 set nrformats+=alpha
 
-" Limit columns at 80 characters (except for mail and markdown files).
+" Limit columns at 80 characters.
 autocmd FileType * setlocal textwidth=80
-autocmd FileType mail,markdown setlocal textwidth=0
 
 " Automatically remove trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
@@ -245,40 +277,19 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 20
 
 " Ignore some file types.
-set wildignore+=*.out,*.pdf
+set wildignore+=*.out,*.exe,*.pdf,*.doc*
 
-" Automatically recompile dwm/dwmblocks/st on save.
+" Automatically recompile suckless software on save.
 autocmd BufWritePost config.h !sudo make install
 
 " Automatically source init.vim on save.
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
-" PYTHON:
-" Update and execute code in terminal.
-autocmd FileType python nnoremap <buffer> <silent> <Leader>f :10sp <bar> terminal python "%" <cr>
-
-let g:python_highlight_all = 1
-
-" MARKDOWN:
-" Sets cleaner output.
-autocmd FileType markdown set conceallevel=2
-
-" CPP:
-" Update and compile code in terminal.
-autocmd FileType cpp nnoremap <buffer> <silent> <Leader>f :!compiler "%" <cr>
-
-" Execute code in terminal.
-autocmd FileType cpp nnoremap <buffer> <silent> <Leader>j :10sp <bar> terminal ./"%:r".out <cr>
-
 " LaTeX:
-let g:vimtex_view_general_viewer = 'zathura'
 let g:tex_flavor = 'latex'
 
 " Runs a script that cleans out tex build files whenever exiting a .tex file.
 autocmd VimLeave *.tex !texclear "%"
-
-" Turn off (on?) all autoindentation.
-filetype indent off
 
 " NVIM LSP:
 " Note: LSP must be instantiated after your colorscheme
