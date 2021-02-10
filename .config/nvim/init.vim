@@ -250,8 +250,9 @@ set foldlevel=99
 " Allow incrementing of letters.
 set nrformats+=alpha
 
-" Limit columns at 80 characters.
+" Limit columns at 80 characters (except for mail and markdown files).
 autocmd FileType * setlocal textwidth=80
+autocmd FileType markdown,mail setlocal textwidth=0
 
 " Automatically remove trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
