@@ -7,8 +7,9 @@ set period 1
 set incsearch on
 set tabstop 4
 set drawbox on
+set mouse on
 set findlen 0
-set timefmt "Mon Jan _2 2006 15:04:05"
+set timefmt "01.2.2006 (Mon) 15:04:05"
 set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:run.xml:lost+found"
 
 # Set previewer
@@ -50,6 +51,14 @@ cmd paste-overwrite &{{
     lf -remote "send $id echo \"\033[0;32mPasted $# file(s)\033[0m\""
 }}
 
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 cmd setbg "$1"
@@ -74,9 +83,14 @@ map cd push :cd<space>
 map <c-r> reload
 map <enter> shell
 map o open
-map X :$atool -x $f
-map Z :&tar -cvzf $f.tar.gz $s
-map x :&chmod +x $fx; lf -remote "send $id reload"
+map x :&chmod +x $f; lf -remote "send $id reload"
+map X :&ext $f
+map Z push :zip<space>
+
+map <m-1> open
+map <m-2> updir
+map <m-up> up
+map <m-down> down
 
 map tU !clear && du --max-depth=1 -h --apparent-size
 map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
