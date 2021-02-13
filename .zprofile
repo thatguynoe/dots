@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Add `~/.local/bin` to PATH
-export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 
 export EDITOR="nvim"
 export TERMINAL="st"
