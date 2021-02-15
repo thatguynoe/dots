@@ -2,5 +2,5 @@
 
 # Displays screen brightness using the light package.
 
-brightness=$(light)
+brightness=$(xbacklight)
 echo "💡${brightness%.*}"
