@@ -11,8 +11,8 @@ case $BLOCK_BUTTON in
 ⚡: charged
 ❗: battery very low!
 - Scroll to adjust backlight." ;;
-	4) backlight_control +5 ;;
-	5) backlight_control -5 ;;
+	4) xbacklight +5 ;;
+	5) xbacklight -5 ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
