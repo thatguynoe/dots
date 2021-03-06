@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Displays screen brightness using the light package.
+# Displays screen brightness using the xbacklight package.
 
 brightness=$(xbacklight)
 echo "💡${brightness%.*}"
