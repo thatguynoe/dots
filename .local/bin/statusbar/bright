@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Displays screen brightness using xbacklight.
+
+printf "💡%.0f\n" "$(xbacklight)"

@@ -1,0 +1,121 @@
+# Basic Settings
+set shell zsh
+set shellopts "-eu"
+set ifs "\n"
+set scrolloff 10
+set period 1
+set incsearch on
+set tabstop 4
+set drawbox on
+set mouse on
+set findlen 0
+set timefmt "01.2.2006 (Mon) 15:04:05"
+set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:*.exe:run.xml:lost+found"
+
+# Set previewer
+set previewer ~/.config/lf/scope
+
+# Functions
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
+        text/*) $EDITOR $fx ;;
+            */json) $EDITOR $fx ;;
+        text/docx) libreoffice $fx >/dev/null 2>&1;;
+        image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
+        image/svg+xml) display -- $f ;;
+        # image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select ;;
+        image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" | setsid sxiv -aio 2>/dev/null | lf-select & ;;
+        audio/*) mpv --audio-display=no $f ;;
+        video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+        *) for f in $fx ; do setsid -f $OPENER $f >/dev/null 2>&1 ; done ;;
+    esac
+}}
+
+cmd paste-overwrite &{{
+    set -f
+    load=$(lf -remote "load")
+    mode=$(echo "$load" | head -1)
+    list=$(echo "$load" | sed '1d')
+    set -- _ $list; shift
+    [ $# -gt 0 ] || exit
+    case $mode in
+        copy)
+            cp -r --remove-destination -- "$@" .
+            ;;
+        move)
+            mv --force -- "$@" .
+            ;;
+    esac
+    lf -remote 'save\nmove\n'
+    lf -remote "send $id load"
+    lf -remote "send $id echo \"\033[0;32mPasted $# file(s)\033[0m\""
+}}
+
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+cmd nvim $nvim "$(echo $* | tr ' ' '\ ')"
+
+cmd setbg "$1"
+cmd bulkrename $vidir
+
+# Unmappings
+map m
+map c
+map y
+map p
+
+# General Mappings
+map <c-f> $lf -remote "send $id select '$(fzf)'"
+map D delete
+map yy copy
+map yw :$echo -n $fx | xclip -selection clipboard
+map pp paste
+map po paste-overwrite
+
+map md push :mkdir<space>
+map cd push :cd<space>
+map <c-r> reload
+map <enter> shell
+map o open
+map x :&chmod +x $f; lf -remote "send $id reload"
+map X :&ext $f
+
+map <m-1> open
+map <m-2> updir
+map <m-up> up
+map <m-down> down
+
+map tU !clear && du --max-depth=1 -h --apparent-size
+map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
+
+map U clear
+map V push :nvim<space>
+map b $setbg $f
+map mm $moviesubs
+map `` push :mark-load<enter>'
+
+# Renaming
+map A rename # at the very end
+map cw push A<c-u> # new rename
+map I push A<c-a> # at the very beginning
+map a push A<a-b><a-b><a-f> # before extention
+map B bulkrename
+
+# Movement
+map gg top
+map J half-down
+map K half-up
+map <c-y> up
+map <c-e> down
+
+# Directory Shortcuts
+map gh cd ~/
+map gd cd ~/Downloads
+map gD cd ~/Documents
+map gp cd ~/Pictures
+map gm cd ~/Music
+map gcf cd ~/.config
+map glc cd ~/.local
+
+map gr cd /
+map gM cd /mnt

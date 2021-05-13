@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# This script displays a dmenu prompt for paired bluetooth devices and connects
+# to a chosen device.
+
+devices=$(bluetoothctl devices | cut -d' ' -f 3-)
+[ "$devices" = "" ] && exit 1
+
+chosen=$(echo "$devices" | dmenu -i -p "Connect to which device?")
+chosen_add=$(bluetoothctl devices | grep -w "$chosen" | awk '{print $2}')
+
+bluetoothctl connect "$chosen_add" && notify-send "Connected to $chosen"

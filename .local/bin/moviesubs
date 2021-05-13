@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Load a movie and its subtitles in mpv.
+
+title=$(find . -maxdepth 1 -name "*.mp4")
+subs=$(find . -maxdepth 2 -name "*.srt" -print -quit)
+
+mpv --sub-file="$subs" "$title" || mpv "$title"
