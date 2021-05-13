@@ -300,7 +300,7 @@ let g:netrw_winsize = 20
 " Ignore some filetypes.
 set wildignore+=*.out,*.exe,*.pdf,*.doc*
 
-" When shortcut files are updated, shortcuts with new material:
+" When shortcut files are updated, update shortcuts with new material:
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
 
 " Automatically recompile suckless software on save.
