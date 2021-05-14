@@ -25,7 +25,6 @@ These dotfiles are intended to go with numerous suckless programs I use:
 ## Install these dotfiles and all dependencies
 
 ```
-git clone https://github.com/thatguynoe/narbs
-cd narbs
+curl -O https://raw.githubusercontent.com/thatguynoe/NARBS/main/narbs.sh
 sh narbs.sh
 ```
