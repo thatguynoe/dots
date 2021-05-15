@@ -49,7 +49,6 @@ function! ToggleBar()
         set noshowcmd
     else
         let s:hidden_all = 0
-        set showmode
         set ruler
         set laststatus=2
         set showcmd
