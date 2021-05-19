@@ -12,8 +12,3 @@ xbanish -i mod4 &   # hide mouse when typing
 numlockx &          # remember numlock
 redshift &          # provides redshift in the screen in the evening
 xcompmgr &          # for transparency
-
-# This line autostarts an instance of Pulseaudio that does not exit on idle.
-pidof -s runit &&
-    ! pidof -s pulseaudio >/dev/null 2>&1 &&
-    setsid -f pulseaudio --start --exit-idle-time=-1 >/dev/null 2>&1
