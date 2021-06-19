@@ -110,6 +110,8 @@ Plug 'nvim-lua/completion-nvim'                 " neovim autocompletion
 Plug 'lervag/vimtex'                            " better LaTeX support
 Plug 'itchyny/lightline.vim'                    " statusline
 Plug 'mengelbrecht/lightline-bufferline'        " bufferline
+Plug 'jreybert/vimagit'                         " git integration
+Plug 'airblade/vim-gitgutter'                   " display git changes
 Plug 'tpope/vim-surround'                       " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                     " better comment manipulation
 Plug 'junegunn/goyo.vim'                        " distraction free editing
@@ -187,6 +189,15 @@ let g:lightline#bufferline#unnamed = '[No Name]'
 let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#clickable = 1
 let g:lightline.component_raw = {'buffers': 1}
+
+" MAGIT:
+nnoremap <silent> <Leader>m :Magit <cr>
+
+" GITGUTTER:
+let g:gitgutter_map_keys = 0
+
+" Default updatetime 4000ms is not good for async update
+set updatetime=100
 
 " GOYO:
 autocmd! User GoyoLeave nested highlight Normal guibg=NONE
