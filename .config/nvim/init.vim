@@ -5,7 +5,7 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
     echo "Downloading junegunn/vim-plug to manage plugins..."
     silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
     silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-    autocmd VimEnter * PlugInstall
+    autocmd VimEnter * :PlugInstall
 endif
 
 " MAPPINGS:
@@ -39,16 +39,16 @@ nnoremap <C-A-j> gj
 nnoremap <C-A-k> gk
 
 " Function for toggling the bottom statusbar:
-let s:hidden_all = 0
+let s:hidden_all_bar = 0
 function! ToggleBar()
-    if s:hidden_all == 0
-        let s:hidden_all = 1
+    if s:hidden_all_bar == 0
+        let s:hidden_all_bar = 1
         set noshowmode
         set noruler
         set laststatus=0
         set noshowcmd
     else
-        let s:hidden_all = 0
+        let s:hidden_all_bar = 0
         set ruler
         set laststatus=2
         set showcmd
@@ -272,9 +272,9 @@ set foldlevel=99
 " Allow incrementing of letters.
 set nrformats+=alpha
 
-" Limit columns at 80 characters (except for mail and markdown files).
-autocmd FileType * setlocal textwidth=80
-autocmd FileType markdown,mail setlocal textwidth=0
+" Ensure files are read as what I want:
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 
 " Automatically remove trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
