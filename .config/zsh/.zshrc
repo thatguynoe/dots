@@ -13,8 +13,9 @@ zstyle ':vcs_info:git:*' formats ' (%b%u%c)'    # (main +*)
 autoload -U colors && colors    # Load colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~\$vcs_info_msg_0_%{$fg[red]%}]%{$reset_color%}$%b "
 
-setopt autocd       # Automatically cd into typed directory.
-stty stop undef     # Disable ctrl-s to freeze terminal.
+setopt autocd                   # Automatically cd into typed directory.
+stty stop undef                 # Disable ctrl-s to freeze terminal.
+zle_highlight=('paste:none')    # Don't highlight text when pasting
 
 # History in cache directory (and don't write duplicate events to history):
 HISTSIZE=10000
