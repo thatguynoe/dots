@@ -1,7 +1,8 @@
 #!/bin/zsh
 
-# Add `~/.local/bin` to PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+# Adds `~/.local/bin` to $PATH recursively
+typeset -U path
+path+=(~/.local/bin{,/**/*(N/)})
 
 # Default programs:
 export EDITOR="nvim"
