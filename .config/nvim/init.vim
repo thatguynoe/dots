@@ -105,7 +105,6 @@ Plug 'nvim-lua/completion-nvim'                 " neovim autocompletion
 Plug 'lervag/vimtex'                            " better LaTeX support
 Plug 'hoob3rt/lualine.nvim'                     " statusline
 Plug 'jreybert/vimagit'                         " git integration
-Plug 'airblade/vim-gitgutter'                   " display git changes
 Plug 'tpope/vim-surround'                       " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                     " better comment manipulation
 Plug 'junegunn/goyo.vim'                        " distraction free editing
@@ -161,12 +160,6 @@ EOF
 
 " MAGIT:
 nnoremap <silent> <Leader>m :Magit<cr>
-
-" GITGUTTER:
-let g:gitgutter_map_keys = 0
-
-" Default updatetime 4000ms is not good for async update
-set updatetime=100
 
 " GOYO:
 autocmd! User GoyoLeave nested highlight Normal guibg=NONE
