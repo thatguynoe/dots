@@ -17,13 +17,13 @@ let maplocalleader = "\<Space>"
 tnoremap <Esc> <C-\><C-n>
 
 " Remove search highlight.
-nnoremap <silent> S :nohlsearch <cr>
+nnoremap <silent> S :nohlsearch<cr>
 
 " Mapping for quitting quickly (and unmap Q for Ex mode).
-nnoremap <silent> Q :qa! <cr>
+nnoremap <silent> Q :qa!<cr>
 
 " Open a terminal.
-nnoremap <silent> <Leader>t :10sp <bar> terminal <cr>
+nnoremap <silent> <Leader>t :10sp <bar> terminal<cr>
 
 " Keep selection after tabbing and remap <TAB> to tab.
 vnoremap > >gv
@@ -55,40 +55,40 @@ function! ToggleBar()
     endif
 endfunction
 
-nnoremap <silent> <leader>h :call ToggleBar() <cr>
+nnoremap <silent> <leader>h :call ToggleBar()<cr>
 
 " Spellchecker mapping.
-nnoremap <silent> <Leader>o :set spell! <cr>
+nnoremap <silent> <Leader>o :set spell!<cr>
 
 " Mappings to navigate buffers.
-nnoremap <silent> <Leader>n :bnext! <cr>
-nnoremap <silent> <Leader>p :bprevious! <cr>
-nnoremap <silent> <Leader>d :bdelete! <cr>
+nnoremap <silent> <Leader>n :bnext!<cr>
+nnoremap <silent> <Leader>p :bprevious!<cr>
+nnoremap <silent> <Leader>d :bdelete!<cr>
 
 " Delete previous and next buffers.
-nnoremap <silent> <Leader>bh :bprevious! <bar> bdelete! <cr>
-nnoremap <silent> <Leader>bl :bnext! <bar> bdelete! <cr>
+nnoremap <silent> <Leader>bh :bprevious! <bar> bdelete!<cr>
+nnoremap <silent> <Leader>bl :bnext! <bar> bdelete!<cr>
 
 " Replace all mapping.
 nnoremap <Leader>r :%s//g<Left><Left>
 
 " Save mapping.
-nnoremap <silent> <Leader>w :update <cr>
+nnoremap <silent> <Leader>w :update<cr>
 
 " Execute the compiler script.
-nnoremap <silent> <Leader>f :update <bar> silent !compiler "%" <cr>
+nnoremap <silent> <Leader>f :update <bar> silent !compiler "%"<cr>
 
 " Open output.
-nnoremap <silent> <Leader>j :silent !opout "%" <cr>
+nnoremap <silent> <Leader>j :silent !opout "%"<cr>
 
 " Goyo mapping.
-nnoremap <silent> <Leader>g :Goyo <cr>
+nnoremap <silent> <Leader>g :Goyo<cr>
 
 " netrw mapping.
-nnoremap <silent> <C-n> :Vexplore <cr>
+nnoremap <silent> <C-n> :Vexplore<cr>
 
 " FZF mapping.
-nnoremap <silent> <Leader>e :FZF <cr>
+nnoremap <silent> <Leader>e :FZF<cr>
 
 " Easier navigation of splits.
 nnoremap <C-j> <C-w><C-j>
@@ -191,7 +191,7 @@ let g:lightline#bufferline#clickable = 1
 let g:lightline.component_raw = {'buffers': 1}
 
 " MAGIT:
-nnoremap <silent> <Leader>m :Magit <cr>
+nnoremap <silent> <Leader>m :Magit<cr>
 
 " GITGUTTER:
 let g:gitgutter_map_keys = 0
@@ -308,7 +308,7 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 20
 
 " Ignore some filetypes.
-set wildignore+=*.out,*.exe,*.pdf,*.doc*
+set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux
 
 " When shortcut files are updated, update shortcuts with new material:
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
@@ -346,7 +346,7 @@ EOF
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " LSP Mappings
-nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gR <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <silent> gR <cmd>lua vim.lsp.buf.references()<cr>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.rename()<cr>
