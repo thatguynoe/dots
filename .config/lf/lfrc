@@ -42,6 +42,7 @@ map m
 map c
 map y
 map p
+map U
 
 # General Mappings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
@@ -67,7 +68,7 @@ map <m-down> down
 map tU !clear && du --max-depth=1 -h --apparent-size
 map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
 
-map U clear
+map u :unselect; clear
 map V push :nvim<space>
 map b $setbg $f
 map mm $moviesubs
