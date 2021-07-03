@@ -19,8 +19,8 @@ set previewer ~/.config/lf/scope
 cmd open ${{
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        text/*) $EDITOR $fx ;;
-            */json) $EDITOR $fx ;;
+        text/*) clear ; $EDITOR $fx ;;
+            */json) clear ; $EDITOR $fx ;;
         text/docx) libreoffice $fx >/dev/null 2>&1;;
         image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
         image/svg+xml) display -- $f ;;
@@ -55,6 +55,7 @@ map cd push :cd<space>
 map <c-r> reload
 map <enter> shell
 map o open
+map e open
 map x :&chmod +x $f; lf -remote "send $id reload"
 map X :&ext $f
 
