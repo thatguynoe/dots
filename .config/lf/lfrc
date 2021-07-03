@@ -31,26 +31,6 @@ cmd open ${{
     esac
 }}
 
-cmd paste-overwrite &{{
-    set -f
-    load=$(lf -remote "load")
-    mode=$(echo "$load" | head -1)
-    list=$(echo "$load" | sed '1d')
-    set -- _ $list; shift
-    [ $# -gt 0 ] || exit
-    case $mode in
-        copy)
-            cp -r --remove-destination -- "$@" .
-            ;;
-        move)
-            mv --force -- "$@" .
-            ;;
-    esac
-    lf -remote 'save\nmove\n'
-    lf -remote "send $id load"
-    lf -remote "send $id echo \"\033[0;32mPasted $# file(s)\033[0m\""
-}}
-
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd nvim $nvim "$(echo $* | tr ' ' '\ ')"
 
@@ -68,8 +48,7 @@ map <c-f> $lf -remote "send $id select '$(fzf)'"
 map D delete
 map yy copy
 map yw :$echo -n $fx | xclip -selection clipboard
-map pp paste
-map po paste-overwrite
+map p paste
 
 map md push :mkdir<space>
 map cd push :cd<space>
