@@ -61,13 +61,8 @@ nnoremap <silent> <leader>h :call ToggleBar()<cr>
 nnoremap <silent> <Leader>o :set spell!<cr>
 
 " Mappings to navigate buffers.
-nnoremap <silent> <Leader>n :bnext!<cr>
-nnoremap <silent> <Leader>p :bprevious!<cr>
+nnoremap <silent> <Leader>b :ls<cr>:buffer<Space>
 nnoremap <silent> <Leader>d :bdelete!<cr>
-
-" Delete previous and next buffers.
-nnoremap <silent> <Leader>bh :bprevious! <bar> bdelete!<cr>
-nnoremap <silent> <Leader>bl :bnext! <bar> bdelete!<cr>
 
 " Replace all mapping.
 nnoremap <Leader>r :%s//g<Left><Left>
@@ -108,8 +103,7 @@ call plug#begin()
 Plug 'neovim/nvim-lspconfig'                    " neovim LSP
 Plug 'nvim-lua/completion-nvim'                 " neovim autocompletion
 Plug 'lervag/vimtex'                            " better LaTeX support
-Plug 'itchyny/lightline.vim'                    " statusline
-Plug 'mengelbrecht/lightline-bufferline'        " bufferline
+Plug 'hoob3rt/lualine.nvim'                     " statusline
 Plug 'jreybert/vimagit'                         " git integration
 Plug 'airblade/vim-gitgutter'                   " display git changes
 Plug 'tpope/vim-surround'                       " better {} [] () manipulation
@@ -147,48 +141,20 @@ let g:completion_enable_auto_hover = 0
 " Set to sort by length instead of alphabet.
 let g:completion_sorting = "length"
 
-" LIGHTLINE:
+" LUALINE:
 " Disables -- INSERT -- and more in the command line.
 set noshowmode
 
-" Enables the tabline.
-set showtabline=2
-
-let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
-        \ 'active': {
-        \   'left':[ [ 'mode', 'paste' ],
-        \            [ 'readonly', 'filename']
-        \   ]
-        \ },
-        \ 'tabline': {
-        \   'left': [ ['buffers'] ],
-        \   'right': [],
-        \ },
-        \ 'component_expand': {
-        \   'buffers': 'lightline#bufferline#buffers'
-        \ },
-        \ 'component_type': {
-        \   'buffers': 'tabsel'
-        \ },
-        \ 'component_function': {
-        \   'filename': 'LightlineFilename',
-        \ },
-        \ 'component': {
-        \   'lineinfo': ' %3l:%-2v',
-        \ },
-    \ }
-
-function! LightlineFilename()
-    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
-    let modified = &modified ? ' +' : ''
-    return filename . modified
-endfunction
-
-let g:lightline#bufferline#unnamed = '[No Name]'
-let g:lightline#bufferline#min_buffer_count = 2
-let g:lightline#bufferline#clickable = 1
-let g:lightline.component_raw = {'buffers': 1}
+lua << EOF
+require'lualine'.setup {
+    sections = {
+        lualine_x = {'encoding', 'filetype'},
+    },
+    inactive_sections = {
+        lualine_x = {'fileformat'},
+    }
+}
+EOF
 
 " MAGIT:
 nnoremap <silent> <Leader>m :Magit<cr>
