@@ -147,6 +147,9 @@ set noshowmode
 
 lua << EOF
 require'lualine'.setup {
+    options = {
+        icons_enabled = false,
+    },
     sections = {
         lualine_x = {'encoding', 'filetype'},
     },
@@ -306,6 +309,7 @@ lua << EOF
 
     require'lspconfig'.texlab.setup{on_attach=require'completion'.on_attach}
     require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+    require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
 EOF
 
 " Show diagnostic on hover.
