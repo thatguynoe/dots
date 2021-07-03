@@ -6,6 +6,7 @@ set selection-clipboard clipboard
 set window-title-basename true
 set statusbar-home-tilde true
 set scroll-step 60
+include gruvbox-dark
 
 map g goto top
 map u scroll half-up
