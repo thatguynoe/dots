@@ -150,11 +150,8 @@ require'lualine'.setup {
         icons_enabled = false,
     },
     sections = {
-        lualine_x = {'encoding', 'filetype'},
+        lualine_c = { { 'filename', path = 1 } },
     },
-    inactive_sections = {
-        lualine_x = {'fileformat'},
-    }
 }
 EOF
 
