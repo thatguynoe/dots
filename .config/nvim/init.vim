@@ -181,9 +181,6 @@ nmap ga <Plug>(EasyAlign)
 " Enable filetype specific mappings and more.
 filetype plugin on
 
-" Turn on syntax highlighting.
-syntax enable
-
 " Set cursor 4 lines away from the edges of the screen.
 set scrolloff=4
 
