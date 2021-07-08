@@ -3,7 +3,7 @@
 # This script displays a dmenu prompt for paired bluetooth devices and connects
 # to a chosen device.
 
-devices=$(bluetoothctl devices | cut -d' ' -f 3-)
+devices=$(bluetoothctl paired-devices | cut -d' ' -f 3-)
 [ "$devices" = "" ] && exit 1
 
 chosen=$(echo "$devices" | dmenu -i -p "Connect to which device?")
