@@ -266,6 +266,9 @@ let g:netrw_winsize = 20
 " Ignore some filetypes.
 set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux
 
+" Enable Goyo by default for mutt writing
+autocmd VimEnter /tmp/neomutt* :Goyo
+
 " When shortcut files are updated, update shortcuts with new material:
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
 
