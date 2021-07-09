@@ -21,3 +21,9 @@ map H navigate previous
 map L navigate next
 map i recolor
 map p print
+
+map [presentation] g goto top
+map [presentation] G goto bottom
+map [presentation] h navigate previous
+map [presentation] l navigate next
+unmap [presentation] z
