@@ -17,6 +17,7 @@ set previewer ~/.config/lf/scope
 
 # Functions
 cmd open ${{
+    test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
         text/*) clear ; $EDITOR $fx ;;
