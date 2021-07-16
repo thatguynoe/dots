@@ -36,6 +36,7 @@ cmd nvim $nvim "$(echo $* | tr ' ' '\ ')"
 
 cmd setbg "$1"
 cmd bulkrename $printf '%s\n' $(basename -a $fx) | vidir -; lf -remote "send $id unselect"
+cmd zip &zip -r "$1.zip" $(basename -a $fx); lf -remote "send $id unselect"
 
 # Unmappings
 map m
@@ -59,6 +60,7 @@ map o open
 map e open
 map x :&chmod +x $f; lf -remote "send $id reload"
 map X :&ext $f
+map Z push :zip<space>
 
 map <m-1> open
 map <m-2> updir
