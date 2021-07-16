@@ -1,6 +1,6 @@
 # Basic Settings
 set shell zsh
-set shellopts "-eu"
+set shellopts "-euy"
 set ifs "\n"
 set scrolloff 10
 set period 1
@@ -35,7 +35,7 @@ cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd nvim $nvim "$(echo $* | tr ' ' '\ ')"
 
 cmd setbg "$1"
-cmd bulkrename $vidir
+cmd bulkrename $printf '%s\n' $(basename -a $fx) | vidir -; lf -remote "send $id unselect"
 
 # Unmappings
 map m
