@@ -118,9 +118,6 @@ Plug 'morhetz/gruvbox'                          " colorscheme
 call plug#end()
 
 " NVIM COMPLETION:
-" Use completion-nvim in every buffer.
-autocmd BufEnter * lua require'completion'.on_attach()
-
 " Use <Tab> and <S-Tab> to navigate through popup menu.
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -150,7 +147,7 @@ require'lualine'.setup {
         icons_enabled = false,
     },
     sections = {
-        lualine_c = { { 'filename', path = 1 } },
+        lualine_c = { { 'filename', path = 1 }, 'diff' },
     },
 }
 EOF
@@ -266,8 +263,10 @@ let g:netrw_winsize = 20
 " Ignore some filetypes.
 set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux
 
-" Enable Goyo by default for mutt writing
-autocmd VimEnter /tmp/neomutt* :Goyo
+" Enable Goyo by default for mutt and markdown writing
+autocmd VimEnter /tmp/neomutt*,*.md :Goyo
+autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> ZZ :Goyo <bar> x!<cr>
+autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> Q :Goyo <bar> q!<cr>
 
 " When shortcut files are updated, update shortcuts with new material:
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
@@ -298,7 +297,7 @@ lua << EOF
     )
 
     require'lspconfig'.texlab.setup{on_attach=require'completion'.on_attach}
-    require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+    require'lspconfig'.pylsp.setup{on_attach=require'completion'.on_attach}
     require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
 EOF
 
