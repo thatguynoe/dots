@@ -35,7 +35,6 @@ cmd open ${{
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd nvim $nvim "$(echo $* | tr ' ' '\ ')"
 
-cmd setbg "$1"
 cmd bulkrename $printf '%s\n' $(basename -a $fx) | vidir -; lf -remote "send $id unselect"
 cmd zip &zip -r "$1.zip" $(basename -a $fx); lf -remote "send $id unselect"
 
