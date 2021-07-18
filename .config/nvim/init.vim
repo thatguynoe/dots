@@ -266,7 +266,6 @@ set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux
 " Enable Goyo by default for mutt and markdown writing
 autocmd VimEnter /tmp/neomutt*,*.md :Goyo
 autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> ZZ :Goyo <bar> x!<cr>
-autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> Q :Goyo <bar> q!<cr>
 
 " When shortcut files are updated, update shortcuts with new material:
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
