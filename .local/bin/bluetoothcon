@@ -9,4 +9,4 @@ devices=$(bluetoothctl paired-devices | cut -d' ' -f3-)
 chosen_device=$(echo "$devices" | dmenu -i -p "Connect to which device?")
 chosen_add=$(bluetoothctl paired-devices | grep -w "$chosen_device" | cut -d' ' -f2)
 
-bluetoothctl connect "$chosen_add" && notify-send "Connected to $chosen_device"
+bluetoothctl agent on && bluetoothctl power on && bluetoothctl connect "$chosen_add" && notify-send "Connected to $chosen_device"
