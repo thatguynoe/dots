@@ -1,13 +1,13 @@
 # Noe's config for zsh (credit to Luke Smith)
 
-# Git settings:
+# Git integration:
 setopt PROMPT_SUBST     # Enable prompt substitution
 autoload -Uz vcs_info   # Enable vcs_info
 precmd () { vcs_info }  # Always load before displaying the prompt
 zstyle ':vcs_info:*' check-for-changes true     # Check for changes
-zstyle ':vcs_info:*' unstagedstr ' *'           # Set unstaged string
-zstyle ':vcs_info:*' stagedstr ' +'             # Set staged string
-zstyle ':vcs_info:git:*' formats ' (%b%u%c)'    # (main +*)
+zstyle ':vcs_info:*' unstagedstr '*'            # Set unstaged string
+zstyle ':vcs_info:*' stagedstr '+'              # Set staged string
+zstyle ':vcs_info:git:*' formats ' (%b%u%c)'    # (main+*)
 
 # Change prompt:
 autoload -U colors && colors    # Load colors
@@ -73,8 +73,6 @@ lfcd () {
     fi
 }
 bindkey -s '^o' 'lfcd\n'
-
-bindkey -s '^a' 'bc -lq\n'
 
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
