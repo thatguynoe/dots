@@ -30,7 +30,6 @@ alias \
     se="sudoedit" \
     sdn="sudo shutdown -h now" \
     copy="xclip -selection clipboard" \
-    os="onedrive --synchronize" \
     mp="pdfunite" \
     p="sudo pacman" \
     z="zathura" \
