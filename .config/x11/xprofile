@@ -12,3 +12,4 @@ xbanish -i mod4 &   # hide mouse when typing
 numlockx &          # remember numlock
 redshift &          # provides redshift in the screen in the evening
 xcompmgr &          # for transparency
+pipewire & pipewire-pulse & pipewire-media-session & # start audio
