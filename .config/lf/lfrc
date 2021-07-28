@@ -20,9 +20,9 @@ cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        text/*) clear ; $EDITOR $fx ;;
-            */json) clear ; $EDITOR $fx ;;
-            */x-abook-addressbook) clear ; $EDITOR $fx ;;
+        text/*) clear & $EDITOR $fx ;;
+            */json) clear & $EDITOR $fx ;;
+            */x-abook-addressbook) clear & $EDITOR $fx ;;
         text/docx) libreoffice $fx >/dev/null 2>&1;;
         image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
         image/svg+xml) display -- $f ;;
