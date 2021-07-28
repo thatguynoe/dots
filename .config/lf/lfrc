@@ -63,11 +63,6 @@ map x :&chmod +x $f; lf -remote "send $id reload"
 map X :&ext $f
 map Z push :zip<space>
 
-map <m-1> open
-map <m-2> updir
-map <m-up> up
-map <m-down> down
-
 map tU !clear && du --max-depth=1 -h --apparent-size
 map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
 
@@ -90,6 +85,11 @@ map J half-down
 map K half-up
 map <c-y> up
 map <c-e> down
+
+map <m-1> open
+map <m-2> updir
+map <m-up> up
+map <m-down> down
 
 # Directory Shortcuts
 map gh cd ~/
