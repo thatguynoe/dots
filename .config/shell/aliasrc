@@ -48,3 +48,6 @@ alias \
     temp="curl -s 'wttr.in/$LOCATION?format='%c%t+\(%f\)''" \
     sunset="curl -s 'wttr.in/$LOCATION?format=%s'" \
     iplocate="curl -s ifconfig.co"
+
+alias \
+    magit="nvim -c MagitOnly"
