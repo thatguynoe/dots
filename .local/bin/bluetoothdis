@@ -2,4 +2,4 @@
 
 # This script disconnects from a connected bluetooth device.
 
-bluetoothctl disconnect && notify-send "Disconnected from device" && pulseaudio --start
+bluetoothctl disconnect && notify-send "Disconnected from device"
