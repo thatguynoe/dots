@@ -7,6 +7,7 @@
 text/x-shellscript=text.desktop;
 text/plain=text.desktop;
 application/json=text.desktop;
+application/x-abook-addressbook=text.desktop;
 
 # DOC's
 application/octet-stream=libreoffice-writer.desktop
