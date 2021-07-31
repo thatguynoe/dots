@@ -69,7 +69,6 @@ map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
 map u :unselect; clear
 map V push :nvim<space>
 map b $setbg $f
-map mm $moviesubs
 map `` push :mark-load<enter>'
 
 # Renaming
