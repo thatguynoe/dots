@@ -9,3 +9,9 @@ export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u $USER)/bus; export D
 ```
 
 This ensures that notifications will display, xdotool commands will function and environmental variables will work as well.
+
+Furthermore, if you set the `Xauthority` variable to something like `$XDG_RUNTIME_DIR/Xauthority` in `~/.zprofile`, you must include this in your crontab as well, else notifications will not display:
+
+```
+export XAUTHORITY=/run/user/$(id -u $USER)/Xauthority; ...
+```
