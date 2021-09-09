@@ -100,20 +100,19 @@ nnoremap <Right> <C-w>>
 " PLUGINS:
 call plug#begin()
 
-Plug 'neovim/nvim-lspconfig'                    " neovim LSP
-Plug 'nvim-lua/completion-nvim'                 " neovim autocompletion
-Plug 'lervag/vimtex'                            " better LaTeX support
-Plug 'hoob3rt/lualine.nvim'                     " statusline
-Plug 'jreybert/vimagit'                         " git integration
-Plug 'tpope/vim-surround'                       " better {} [] () manipulation
-Plug 'tpope/vim-commentary'                     " better comment manipulation
-Plug 'junegunn/goyo.vim'                        " distraction free editing
-Plug 'junegunn/vim-easy-align'                  " aligns text
-Plug 'unblevable/quick-scope'                   " better line navigation
-Plug 'octol/vim-cpp-enhanced-highlight'         " better c++ syntax highlighting
-Plug 'vim-python/python-syntax'                 " better python syntax highlighting
-Plug 'psliwka/vim-smoothie'                     " smooth scrolling
-Plug 'morhetz/gruvbox'                          " colorscheme
+Plug 'neovim/nvim-lspconfig'                                " neovim LSP
+Plug 'nvim-lua/completion-nvim'                             " neovim autocompletion
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " syntax highlighting
+Plug 'lervag/vimtex'                                        " better LaTeX support
+Plug 'hoob3rt/lualine.nvim'                                 " statusline
+Plug 'jreybert/vimagit'                                     " git integration
+Plug 'tpope/vim-surround'                                   " better {} [] () manipulation
+Plug 'tpope/vim-commentary'                                 " better comment manipulation
+Plug 'junegunn/goyo.vim'                                    " distraction free editing
+Plug 'junegunn/vim-easy-align'                              " aligns text
+Plug 'unblevable/quick-scope'                               " better line navigation
+Plug 'psliwka/vim-smoothie'                                 " smooth scrolling
+Plug 'morhetz/gruvbox'                                      " colorscheme
 
 call plug#end()
 
@@ -283,6 +282,20 @@ autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 autocmd VimLeave *.tex !texclear "%"
 
 let g:tex_flavor = 'latex'
+let g:vimtex_quickfix_mode = 0
+
+" TREESITTER:
+lua << EOF
+    require("nvim-treesitter.configs").setup {
+        ensure_installed = { "c", "cpp", "lua", "python", "html" },
+        highlight = {
+            enable = true,
+        },
+        indent = {
+            enable = false,
+        },
+    }
+EOF
 
 " NVIM LSP:
 " Note: LSP must be instantiated after your colorscheme
