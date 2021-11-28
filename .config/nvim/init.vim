@@ -246,7 +246,7 @@ set noswapfile
 
 " MISCELLANEOUS:
 " Enables a global clipboard.
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 " Enable mouse support.
 set mouse=a
@@ -282,6 +282,7 @@ autocmd VimLeave *.tex !texclear "%"
 
 let g:tex_flavor = 'latex'
 let g:vimtex_quickfix_mode = 0
+let g:vimtex_indent_enabled = 0
 
 " TREESITTER:
 lua << EOF
