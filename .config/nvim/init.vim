@@ -101,7 +101,8 @@ nnoremap <Right> <C-w>>
 call plug#begin()
 
 Plug 'neovim/nvim-lspconfig'                                " neovim LSP
-Plug 'nvim-lua/completion-nvim'                             " neovim autocompletion
+Plug 'hrsh7th/nvim-cmp'                                     " neovim autocompletion
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " syntax highlighting
 Plug 'lervag/vimtex'                                        " better LaTeX support
 Plug 'hoob3rt/lualine.nvim'                                 " statusline
@@ -116,25 +117,9 @@ Plug 'morhetz/gruvbox'                                      " colorscheme
 
 call plug#end()
 
-" NVIM COMPLETION:
-" Use <Tab> and <S-Tab> to navigate through popup menu.
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Map <c-p> to manually trigger completion
-imap <silent> <C-p> <Plug>(completion_trigger)
-
+" NVIM CMP:
 " Set completeopt to have a better completion experience.
 set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion.
-set shortmess+=c
-
-" Disable LSP's hover and displays in a floating window.
-let g:completion_enable_auto_hover = 0
-
-" Set to sort by length instead of alphabet.
-let g:completion_sorting = "length"
 
 " LUALINE:
 " Disables -- INSERT -- and more in the command line.
@@ -299,9 +284,10 @@ lua << EOF
     }
 EOF
 
-" NVIM LSP:
-" Note: LSP must be instantiated after your colorscheme
+" NVIM LSP AND CMP:
+" Note: LSP should be instantiated after your colorscheme
 lua << EOF
+    -- DIAGONOSTICS
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
             virtual_text = false,
@@ -310,9 +296,31 @@ lua << EOF
         }
     )
 
-    require'lspconfig'.texlab.setup{on_attach=require'completion'.on_attach}
-    require'lspconfig'.pylsp.setup{on_attach=require'completion'.on_attach}
-    require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
+    -- NVIM-CMP
+    local cmp = require'cmp'
+    cmp.setup({
+        mapping = {
+            ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+            ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+        },
+
+        sources = {
+            { name = 'nvim_lsp' }
+        }
+    })
+
+    -- LSP SERVERS
+    require('lspconfig')['texlab'].setup {
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
+    require('lspconfig')['pylsp'].setup {
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
+    require('lspconfig')['clangd'].setup {
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
 EOF
 
 " Show diagnostic on hover.
