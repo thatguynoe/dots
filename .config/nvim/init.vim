@@ -105,7 +105,7 @@ Plug 'hrsh7th/nvim-cmp'                                     " neovim autocomplet
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " syntax highlighting
 Plug 'lervag/vimtex'                                        " better LaTeX support
-Plug 'hoob3rt/lualine.nvim'                                 " statusline
+Plug 'nvim-lualine/lualine.nvim'                            " statusline
 Plug 'jreybert/vimagit'                                     " git integration
 Plug 'tpope/vim-surround'                                   " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                                 " better comment manipulation
@@ -125,13 +125,25 @@ set completeopt=menuone,noinsert,noselect
 " Disables -- INSERT -- and more in the command line.
 set noshowmode
 
+" Display 'MI' when both tab and spaces are used for indenting the current buffer
+lua << EOF
+    function MixedIndent()
+        local space_indent = vim.fn.search([[\v^ +]], 'nw') > 0
+        local tab_indent = vim.fn.search([[\v^\t+]], 'nw') > 0
+        local mixed = (space_indent and tab_indent)
+                       or vim.fn.search([[\v^(\t+ | +\t)]], 'nw') > 0
+        return mixed and 'MI' or ''
+    end
+EOF
+
 lua << EOF
 require'lualine'.setup {
     options = {
         icons_enabled = false,
     },
     sections = {
-        lualine_c = { { 'filename', path = 1 }, 'diff' },
+        lualine_c = { { 'filename', path = 1 } },
+        lualine_z = { 'location', MixedIndent },
     },
 }
 EOF
