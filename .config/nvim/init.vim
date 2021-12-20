@@ -201,9 +201,6 @@ set splitright splitbelow
 " Disable end of file blank line.
 autocmd FileType * setlocal noendofline nofixendofline
 
-" Allow hiding buffers that have unsaved changes.
-set hidden
-
 " This setting makes search case-insensitive when all characters in the string
 " being searched are lowercase. However, the search becomes case-sensitive if
 " it contains any capital letters.
