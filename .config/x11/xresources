@@ -1,0 +1,7 @@
+# vim: filetype=xdefaults
+
+/* nsxiv */
+Nsxiv.window.background: #282828
+Nsxiv.window.foreground: #ebdbb2
+Nsxiv.bar.background: #504945
+Nsxiv.bar.foreground: #ebdbb2

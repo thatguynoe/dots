@@ -3,13 +3,16 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
+xrandr --dpi 96     # set dpi
 setbg &             # set the background with the `setbg` script
 remaps &            # run the `remaps` script, switching caps/esc and more
-mpd &               # music player daemon
-dunst &             # enables desktop notifications
-unclutter &         # hide mouse when idle
-xbanish -i mod4 &   # hide mouse when typing
-numlockx &          # remember numlock
-redshift &          # provides redshift in the screen in the evening
-xcompmgr &          # for transparency
-pipewire & pipewire-pulse & pipewire-media-session & # start audio
+xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$! # use Xresources colors/settings on startup
+
+autostart="mpd dunst unclutter numlockx redshift xcompmgr pipewire"
+
+for program in $autostart; do
+    pidof -s "$program" || setsid -f "$program"
+done >/dev/null 2>&1
+
+# Ensure that xrdb has finished running before moving on to start the WM/DE.
+[ -n "$xrdbpid" ] && wait "$xrdbpid"
