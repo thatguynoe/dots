@@ -33,6 +33,18 @@ cmd open ${{
     esac
 }}
 
+cmd paste-overwrite %{{
+    mode=$(head -1 ~/.local/share/lf/files)
+    list=$(sed 1d ~/.local/share/lf/files)
+    if [ $mode = 'copy' ]; then
+        cp -r $list .
+    elif [ $mode = 'move' ]; then
+        mv $list .
+    fi
+    lf -remote 'send load'
+    lf -remote 'send clear'
+}}
+
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd nvim $nvim "$(echo $* | tr ' ' '\ ')"
 
@@ -51,7 +63,8 @@ map <c-f> $lf -remote "send $id select '$(fzf)'"
 map D delete
 map yy copy
 map yw :$echo -n $fx | xclip -selection clipboard
-map p paste
+map pp paste
+map po paste-overwrite
 
 map md push :mkdir<space>
 map cd push :cd<space>
