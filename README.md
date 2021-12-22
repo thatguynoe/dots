@@ -8,7 +8,7 @@ My dotfiles are heavily inspired by [Luke Smith's dotfiles](https://github.com/L
     * zsh (shell)
     * lf (file manager)
     * mpd/ncmpcpp (music)
-    * sxiv (image/gif viewer)
+    * nsxiv (image/gif viewer)
     * mpv (video player)
     * other stuff like xdg default programs, inputrc and more, etc.
 * I try to minimize what's directly in `~` so:
