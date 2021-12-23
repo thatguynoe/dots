@@ -235,8 +235,10 @@ set nrformats+=alpha
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 
-" Automatically remove trailing whitespace on save.
+" Automatically remove trailing whitespace on save and reset cursor position.
+autocmd BufWritePre * let currPos = getpos(".")
 autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
 
 " Remove swap files.
 set noswapfile
