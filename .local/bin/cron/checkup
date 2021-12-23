@@ -15,5 +15,5 @@ if pacman -Qu | grep -v "\[ignored\]"
 then
     notify-send "🎁 Repository Sync" "Updates available."
 else
-    notify-send "📦 Repository Sync"  "Sync complete. No new packages for update."
+    notify-send "📦 Repository Sync" "No new packages for update."
 fi
