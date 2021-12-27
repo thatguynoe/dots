@@ -98,7 +98,7 @@ nnoremap <Left> <C-w><
 nnoremap <Right> <C-w>>
 
 " PLUGINS:
-call plug#begin()
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 
 Plug 'neovim/nvim-lspconfig'                                " neovim LSP
 Plug 'hrsh7th/nvim-cmp'                                     " neovim autocompletion
