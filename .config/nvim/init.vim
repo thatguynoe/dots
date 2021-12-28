@@ -198,9 +198,6 @@ set linebreak
 " Set horizontal splits to automatically open to the right and below.
 set splitright splitbelow
 
-" Disable end of file blank line.
-autocmd FileType * setlocal noendofline nofixendofline
-
 " This setting makes search case-insensitive when all characters in the string
 " being searched are lowercase. However, the search becomes case-sensitive if
 " it contains any capital letters.
