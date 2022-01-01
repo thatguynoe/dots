@@ -13,6 +13,6 @@ case "$(printf "🔒 lock\n🚪 leave dwm\n♻️ renew dwm\n🐻 hibernate\n�
     '💤 sleep') slock $ctl suspend ;;
     '🔃 reboot') $ctl reboot ;;
     '🖥️ shutdown') $ctl poweroff ;;
-    '📺 display off') xset dpms force off ;;
+    '📺 display off') sleep 1 && xset dpms force off ;;
     *) exit 1 ;;
 esac
