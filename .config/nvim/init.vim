@@ -333,7 +333,7 @@ lua << EOF
 EOF
 
 " Show diagnostic on hover.
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+nnoremap <silent> <Leader>a <cmd>lua vim.diagnostic.open_float(0, {scope = "cursor"}, {focus = false})<cr>
 
 " LSP Mappings
 nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<cr>
