@@ -23,8 +23,8 @@ lf is the file manager.
     v - Toggle highlight all
     u - Clear selection
     d - Cut file(s)
-    y - Yank/copy file(s)
-    p - Paste cut/copied file(s)
+    yy - Yank/copy file(s)
+    pp - Paste cut/copied file(s)
     B - Rename all selected files in text editor
     D - Delete file(s) (press y to confirm)
     ctrl-f - Fuzzy find (fzf)
