@@ -33,7 +33,7 @@ alias \
     ka="killall" \
     g="git" \
     se="sudoedit" \
-    sdn="sudo shutdown -h now" \
+    sdn="loginctl poweroff" \
     copy="xclip -selection clipboard" \
     mp="pdfunite" \
     p="sudo pacman" \
