@@ -14,7 +14,8 @@ map d scroll half-down
 map D toggle_page_mode
 map b toggle_statusbar
 map r reload
-map R rotate
+map > rotate rotate-cw
+map < rotate rotate-ccw
 map K zoom in
 map J zoom out
 map H navigate previous
