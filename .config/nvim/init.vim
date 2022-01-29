@@ -321,8 +321,10 @@ lua << EOF
     })
 
     local custom_lsp_attach = function(client)
-        -- Show diagnostic on hover.
+        -- Open diagnostic, and go to next and previous diagnostics
         vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>a', '<cmd>lua vim.diagnostic.open_float(0, {scope = "cursor"}, {focus = false})<cr>', {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>lua vim.diagnostic.goto_next()<cr>', {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {noremap = true})
 
         -- LSP Mappings
         vim.api.nvim_buf_set_keymap(0, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
