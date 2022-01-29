@@ -183,6 +183,9 @@ set termguicolors
 " Show relative line numbers.
 set number relativenumber
 
+" Enable transparent sign column.
+autocmd ColorScheme * highlight! link SignColumn LineNr
+
 " Set theme.
 let g:gruvbox_invert_selection = 0
 let g:gruvbox_italic = 1
