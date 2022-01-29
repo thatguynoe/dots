@@ -320,23 +320,28 @@ lua << EOF
         }
     })
 
+    local custom_lsp_attach = function(client)
+        -- Show diagnostic on hover.
+        vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>a', '<cmd>lua vim.diagnostic.open_float(0, {scope = "cursor"}, {focus = false})<cr>', {noremap = true})
+
+        -- LSP Mappings
+        vim.api.nvim_buf_set_keymap(0, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, 'n', 'gR', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true})
+    end
+
     -- LSP SERVERS
     require('lspconfig')['texlab'].setup {
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        on_attach = custom_lsp_attach
     }
-    require('lspconfig')['pylsp'].setup {
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    }
-    require('lspconfig')['clangd'].setup {
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    }
+    -- require('lspconfig')['pylsp'].setup {
+    --     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    --     on_attach = custom_lsp_attach
+    -- }
+    -- require('lspconfig')['clangd'].setup {
+    --     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    --     on_attach = custom_lsp_attach
+    -- }
 EOF
-
-" Show diagnostic on hover.
-nnoremap <silent> <Leader>a <cmd>lua vim.diagnostic.open_float(0, {scope = "cursor"}, {focus = false})<cr>
-
-" LSP Mappings
-nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<cr>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap <silent> gR <cmd>lua vim.lsp.buf.references()<cr>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.rename()<cr>
