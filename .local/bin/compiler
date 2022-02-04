@@ -19,7 +19,6 @@ cd "$dir" || exit 1
 textype() { \
     command="pdflatex"
     ( head -n5 "$file" | grep -qi 'xelatex' ) && command="xelatex"
-    grep -qi '\\usetikzlibrary\s*{\s*graphdrawing\s*}' "$file" && command="lualatex"
     $command --output-directory="$dir" "$base" &&
     grep -qi addbibresource "$file" &&
     biber --input-directory "$dir" "$base" &&
