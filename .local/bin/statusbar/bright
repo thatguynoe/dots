@@ -2,4 +2,4 @@
 
 # Displays screen brightness using xbacklight.
 
-printf "💡%.0f" "$(xbacklight)"
+printf "💡%.0f\n" "$(xbacklight)"
