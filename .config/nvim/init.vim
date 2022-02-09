@@ -195,6 +195,9 @@ colorscheme gruvbox
 " Enable background transparency.
 highlight Normal guibg=NONE
 
+" Set title.
+set title titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
+
 " Enable linebreaking at words, not characters.
 set linebreak
 
