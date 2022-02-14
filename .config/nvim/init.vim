@@ -103,6 +103,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 Plug 'neovim/nvim-lspconfig'                                " neovim LSP
 Plug 'hrsh7th/nvim-cmp'                                     " neovim autocompletion
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'                                     " snippets
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " syntax highlighting
 Plug 'lervag/vimtex'                                        " better LaTeX support
 Plug 'nvim-lualine/lualine.nvim'                            " statusline
@@ -316,17 +318,35 @@ lua << EOF
     )
 
     -- NVIM-CMP
+    local luasnip = require("luasnip")
     local cmp = require'cmp'
     cmp.setup({
+        snippet = {
+            expand = function(args)
+                luasnip.lsp_expand(args.body)
+            end,
+        },
+
         mapping = {
             ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
             ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.close(),
+            ['<C-k>'] = cmp.mapping(function()
+                if luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                end
+            end, { "i", "s" }),
+            ['<C-j>'] = cmp.mapping(function()
+                if luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                end
+            end, { silent = true }),
         },
 
         sources = {
-            { name = 'nvim_lsp' }
+            { name = 'nvim_lsp' },
+            { name = 'luasnip' }
         }
     })
 
