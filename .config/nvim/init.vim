@@ -129,24 +129,22 @@ set noshowmode
 
 " Display 'MI' when both tab and spaces are used for indenting the current buffer
 lua << EOF
-    function MixedIndent()
-        local space_indent = vim.fn.search([[\v^ +]], 'nw') > 0
-        local tab_indent = vim.fn.search([[\v^\t+]], 'nw') > 0
-        local mixed = (space_indent and tab_indent)
-                       or vim.fn.search([[\v^(\t+ | +\t)]], 'nw') > 0
-        return mixed and 'MI' or ''
-    end
-EOF
+function MixedIndent()
+  local space_indent = vim.fn.search([[\v^ +]], 'nw') > 0
+  local tab_indent = vim.fn.search([[\v^\t+]], 'nw') > 0
+  local mixed = (space_indent and tab_indent)
+                 or vim.fn.search([[\v^(\t+ | +\t)]], 'nw') > 0
+  return mixed and 'MI' or ''
+end
 
-lua << EOF
 require'lualine'.setup {
-    options = {
-        icons_enabled = false,
-    },
-    sections = {
-        lualine_c = { { 'filename', path = 1 } },
-        lualine_z = { 'location', MixedIndent },
-    },
+  options = {
+    icons_enabled = false,
+  },
+  sections = {
+    lualine_c = { { 'filename', path = 1 } },
+    lualine_z = { 'location', MixedIndent },
+  }
 }
 EOF
 
@@ -294,78 +292,85 @@ let g:vimtex_indent_enabled = 0
 
 " TREESITTER:
 lua << EOF
-    require("nvim-treesitter.configs").setup {
-        ensure_installed = { "c", "cpp", "lua", "python", "html" },
-        highlight = {
-            enable = true,
-        },
-        indent = {
-            enable = false,
-        },
-    }
+require("nvim-treesitter.configs").setup {
+  ensure_installed = { "c", "cpp", "lua", "python", "html" },
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = false,
+  },
+}
 EOF
 
 " NVIM LSP AND CMP:
 " Note: LSP should be instantiated after your colorscheme
 lua << EOF
-    -- DIAGONOSTICS
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = false,
-            signs = true,
-            update_in_insert = false,
-        }
-    )
+  -- DIAGONOSTICS
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = false,
+      signs = true,
+      update_in_insert = false,
+    }
+  )
 
-    -- NVIM-CMP
-    local luasnip = require("luasnip")
-    local cmp = require'cmp'
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                luasnip.lsp_expand(args.body)
-            end,
-        },
+  -- NVIM-CMP
+  local luasnip = require("luasnip")
+  local cmp = require'cmp'
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end,
+    },
 
-        mapping = {
-            ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-            ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-            ['<C-Space>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.close(),
-            ['<C-k>'] = cmp.mapping(function()
-                if luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                end
-            end, { "i", "s" }),
-            ['<C-j>'] = cmp.mapping(function()
-                if luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                end
-            end, { silent = true }),
-        },
+    mapping = {
+      ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+      ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<C-k>'] = cmp.mapping(function()
+        if luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        end
+      end, { "i", "s" }),
+      ['<C-j>'] = cmp.mapping(function()
+        if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        end
+      end, { silent = true }),
+    },
 
-        sources = {
-            { name = 'nvim_lsp' },
-            { name = 'luasnip' }
-        }
-    })
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }
+    }
+  })
 
-    local custom_lsp_attach = function(client)
-        -- Open diagnostic, and go to next and previous diagnostics
-        vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>a', '<cmd>lua vim.diagnostic.open_float(0, {scope = "cursor"}, {focus = false})<cr>', {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>lua vim.diagnostic.goto_next()<cr>', {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {noremap = true})
+  local on_attach = function(client)
+    -- Open diagnostic, and go to next and previous diagnostics
+    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>a', '<cmd>lua vim.diagnostic.open_float(0, {scope = "cursor"}, {focus = false})<cr>', {noremap = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>lua vim.diagnostic.goto_next()<cr>', {noremap = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {noremap = true})
 
-        -- LSP Mappings
-        vim.api.nvim_buf_set_keymap(0, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, 'n', 'gR', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap = true})
-        vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true})
-    end
+    -- LSP Mappings
+    vim.api.nvim_buf_set_keymap(0, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', 'gR', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap = true})
+    vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true})
+  end
 
-    -- LSP SERVERS
-    require('lspconfig')['texlab'].setup({
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        on_attach = custom_lsp_attach
-    })
+  -- Use a loop to conveniently call 'setup' on multiple servers and
+  -- map buffer local keybindings when the language server attaches
+  local servers = { 'texlab' }
+  for _, lsp in pairs(servers) do
+    require('lspconfig')[lsp].setup {
+      on_attach = on_attach,
+      flags = {
+        -- This will be the default in neovim 0.7+
+        debounce_text_changes = 150,
+      }
+    }
+  end
 EOF
