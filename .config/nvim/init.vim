@@ -339,7 +339,7 @@ lua << EOF
         if luasnip.jumpable(-1) then
             luasnip.jump(-1)
         end
-      end, { silent = true }),
+      end, { "i", "s" }),
     },
 
     sources = {
