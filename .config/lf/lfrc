@@ -23,7 +23,7 @@ cmd open ${{
         text/*) clear & $EDITOR $fx ;;
             */json) clear & $EDITOR $fx ;;
             */x-abook-addressbook) clear & $EDITOR $fx ;;
-        text/docx) libreoffice $fx >/dev/null 2>&1;;
+        text/docx) onlyoffice-desktopeditors $fx >/dev/null 2>&1;;
         image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
         image/svg+xml) display -- $f ;;
         image/*) nsxiv-rifle $f ;;
