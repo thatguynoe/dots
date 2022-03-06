@@ -50,4 +50,5 @@ alias \
     iplocate="curl -s ifconfig.co"
 
 alias \
+    lf="lfub" \
     magit="nvim -c MagitOnly"
