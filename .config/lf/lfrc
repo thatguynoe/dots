@@ -11,10 +11,10 @@ set mouse on
 set findlen 0
 set timefmt "01.2.2006 (Mon) 15:04:05"
 set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:*.exe:*.o:run.xml:lost+found"
-set cleaner ~/.local/bin/lf-cleaner
 
-# Set previewer
+# Set file previewer and cleaner
 set previewer ~/.config/lf/scope
+set cleaner ~/.config/lf/cleaner
 
 # Functions
 cmd open ${{
