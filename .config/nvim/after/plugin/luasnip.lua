@@ -10,9 +10,9 @@ luasnip.config.set_config {
 }
 
 -- luasnip.parser.parse_snippet(<text>, <VS****> style snippet>)
-luasnip.snippets = {
+luasnip.add_snippets(nil, {
     tex = {
         -- LaTeX specific snippets go here.
         luasnip.parser.parse_snippet("\\begin", "\\begin{$1}\n    $0\n\\end{$1}"),
     },
-}
+})
