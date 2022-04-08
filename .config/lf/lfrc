@@ -54,6 +54,7 @@ cmd bulkrename $printf '%s\n' $(basename -a $fx) | vidir -; lf -remote "send $id
 cmd zip &zip -r "$1.zip" $(basename -a $fx); lf -remote "send $id unselect"
 
 # Unmappings
+map t
 map m
 map c
 map y
