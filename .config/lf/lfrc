@@ -21,7 +21,7 @@ cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        application/x-pie-executable | application/x-object) true ;;
+        application/x-pie-executable | application/x-object) lf -remote "send echo Cannot open binaries." ;;
         text/*) clear & $EDITOR $fx ;;
             */json) clear & $EDITOR $fx ;;
             */x-abook-addressbook) clear & $EDITOR $fx ;;
