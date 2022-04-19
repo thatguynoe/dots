@@ -15,4 +15,10 @@ luasnip.add_snippets(nil, {
         -- LaTeX specific snippets go here.
         luasnip.parser.parse_snippet("\\begin", "\\begin{$1}\n    $0\n\\end{$1}"),
     },
+
+    markdown = {
+        -- Markdown specific snippets go here.
+        luasnip.parser.parse_snippet("**", "**$1** $0"),
+        luasnip.parser.parse_snippet("*", "*$1* $0"),
+    },
 })
