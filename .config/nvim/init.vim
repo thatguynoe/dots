@@ -251,9 +251,9 @@ autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 
 " Automatically remove trailing whitespace on save and reset cursor position.
 function TrimWhiteSpace()
-    let currPos = getpos(".")
+    let cursor_pos = getpos(".")
     %s/\s\+$//e
-    cal cursor(currPos[1], currPos[2])
+    call cursor(cursor_pos[1], cursor_pos[2])
 endfunction
 
 autocmd BufWritePre * call TrimWhiteSpace()
