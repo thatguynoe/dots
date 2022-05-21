@@ -6,14 +6,12 @@
 xrandr --dpi 96     # set dpi
 setbg &             # set the background with the `setbg` script
 remaps &            # run the `remaps` script, switching caps/esc and more
-pipewire &          # start audio
-redshift &          # provides redshift in the screen in the evening
 xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$! # use Xresources colors/settings on startup
 
-autostart="mpd dunst unclutter numlockx xcompmgr"
+autostart="mpd dunst pipewire redshift unclutter numlockx xcompmgr"
 
 for program in $autostart; do
-    pidof -s "$program" || setsid -f "$program"
+    pidof -s "$program" || "$program" &
 done >/dev/null 2>&1
 
 # Ensure that xrdb has finished running before moving on to start the WM/DE.
