@@ -16,9 +16,6 @@ let maplocalleader = "\<Space>"
 " Exit terminal mode.
 tnoremap <Esc> <C-\><C-n>
 
-" Remove search highlight.
-nnoremap <silent> S :nohlsearch<cr>
-
 " Mapping for quitting quickly (and unmap Q for Ex mode).
 nnoremap <silent> Q :qa!<cr>
 
@@ -299,6 +296,9 @@ autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/
 
 " Automatically source init.vim on save.
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
+
+" Call :noh when entering insert mode.
+autocmd! InsertEnter * call feedkeys("\<Cmd>noh\<cr>" , 'n')
 
 " LaTeX:
 " Runs a script that cleans out tex build files whenever exiting a .tex file.
