@@ -201,6 +201,9 @@ set number relativenumber
 " Enable transparent sign column.
 autocmd ColorScheme * highlight! link SignColumn LineNr
 
+" Set sign column in number column.
+set signcolumn=number
+
 " Set theme.
 let g:gruvbox_invert_selection = 0
 let g:gruvbox_italic = 1
