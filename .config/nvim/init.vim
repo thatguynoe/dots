@@ -305,7 +305,7 @@ autocmd! InsertEnter * call feedkeys("\<Cmd>nohlsearch\<cr>" , 'n')
 
 " LaTeX:
 " Runs a script that cleans out tex build files whenever exiting a .tex file.
-autocmd VimLeave *.tex !texclear "%"
+autocmd BufWipeout,VimLeave *.tex !texclear "%"
 
 let g:tex_flavor = 'latex'
 let g:vimtex_quickfix_mode = 0
