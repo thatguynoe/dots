@@ -5,7 +5,7 @@ luasnip.config.set_config {
     -- You can jump back into it even if you move outside of the selection
     history = true,
 
-    -- This one is cool cause if you have dynamic snippets, it updates as you type!
+    -- Updates dynamic snippets as you type
     updateevents = "TextChanged,TextChangedI",
 }
 
@@ -13,7 +13,7 @@ luasnip.config.set_config {
 luasnip.add_snippets(nil, {
     tex = {
         -- LaTeX specific snippets go here.
-        luasnip.parser.parse_snippet("\\begin", "\\begin{$1}\n    $0\n\\end{$1}"),
+        luasnip.parser.parse_snippet("\\b", "\\begin{$1}\n    $0\n\\end{$1}"),
     },
 
     markdown = {
