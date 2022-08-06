@@ -300,8 +300,8 @@ autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/
 " Automatically source init.vim on save.
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
-" Call :noh when entering insert mode.
-autocmd! InsertEnter * call feedkeys("\<Cmd>noh\<cr>" , 'n')
+" Call :nohlsearch when entering insert mode.
+autocmd! InsertEnter * call feedkeys("\<Cmd>nohlsearch\<cr>" , 'n')
 
 " LaTeX:
 " Runs a script that cleans out tex build files whenever exiting a .tex file.
