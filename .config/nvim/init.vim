@@ -198,9 +198,6 @@ set termguicolors
 " Show relative line numbers.
 set number relativenumber
 
-" Enable transparent sign column.
-autocmd ColorScheme * highlight! link SignColumn LineNr
-
 " Set sign column in number column.
 set signcolumn=number
 
