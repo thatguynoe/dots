@@ -328,18 +328,9 @@ EOF
 " NVIM LSP AND CMP:
 " Note: LSP should be instantiated after your colorscheme
 lua << EOF
-  -- DIAGONOSTICS
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = false,
-      signs = true,
-      update_in_insert = false,
-    }
-  )
-
-  -- NVIM-CMP
   local luasnip = require("luasnip")
   local cmp = require'cmp'
+
   cmp.setup({
     snippet = {
       expand = function(args)
@@ -370,17 +361,24 @@ lua << EOF
     }
   })
 
-  local on_attach = function(client)
+  local on_attach = function(client, bufnr)
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+
+    -- No virtual text for diagnostics
+    vim.diagnostic.config({
+      virtual_text = false
+    })
+
     -- Open diagnostic, and go to next and previous diagnostics
-    vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>a', '<cmd>lua vim.diagnostic.open_float(0, {scope = "cursor"}, {focus = false})<cr>', {noremap = true})
-    vim.api.nvim_buf_set_keymap(0, 'n', ']e', '<cmd>lua vim.diagnostic.goto_next()<cr>', {noremap = true})
-    vim.api.nvim_buf_set_keymap(0, 'n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {noremap = true})
+    vim.keymap.set('n', '<Leader>a', vim.diagnostic.open_float, bufopts)
+    vim.keymap.set('n', ']e', vim.diagnostic.goto_next, bufopts)
+    vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, bufopts)
 
     -- LSP Mappings
-    vim.api.nvim_buf_set_keymap(0, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
-    vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true})
-    vim.api.nvim_buf_set_keymap(0, 'n', 'gR', '<cmd>lua vim.lsp.buf.references()<cr>', {noremap = true})
-    vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true})
+    vim.keymap.set('n', 'K',  vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.rename, bufopts)
   end
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
