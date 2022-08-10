@@ -10,9 +10,9 @@ out="$(ping -c 1 -q 8.8.8.8 | awk '/transmitted/ {print $4}')"
 last="$(tail log.txt -n 1 | cut -d " " -f 1)"
 
 if [ "$out" -eq 0 ] && ([ -z "$last" ] || [ "$last" = "Up" ]); then
-    echo "Down at $(date "+%m/%d/%Y (%a) %I:%M:%S%P")" >> log.txt
+    echo "Down at $(date "+%m/%d/%Y (%a) %I:%M:%S%P")" >>log.txt
 elif [ "$out" -eq 1 ] && [ "$last" = "Down" ]; then
-    echo "Up at   $(date "+%m/%d/%Y (%a) %I:%M:%S%P")" >> log.txt
+    echo "Up at   $(date "+%m/%d/%Y (%a) %I:%M:%S%P")" >>log.txt
 fi
 
 sleep 1

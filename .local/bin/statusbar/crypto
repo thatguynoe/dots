@@ -14,15 +14,19 @@ LBC;lbc;📚"
 dir="${XDG_DATA_HOME:-$HOME/.local/share}/crypto-prices"
 
 getprices() { # The command to get the desired prices
-    printf "🔃 "; printprices
-    { rm -rf "${dir:?}/*"
-    echo "$coins" | while IFS=';' read -r human web icon; do
-        val="$(curl -s "rate.sx/1$web")" &&
-        echo "$icon;$val;$human" > "$dir/$web"
-    done; [ -d "$dir" ] && touch "$dir"
-    pkill -RTMIN+13 "${STATUSBAR:-dwmblocks}" ;} &
+    printf "🔃 "
+    printprices
+    {
+        rm -rf "${dir:?}/*"
+        echo "$coins" | while IFS=';' read -r human web icon; do
+            val="$(curl -s "rate.sx/1$web")" &&
+                echo "$icon;$val;$human" >"$dir/$web"
+        done
+        [ -d "$dir" ] && touch "$dir"
+        pkill -RTMIN+13 "${STATUSBAR:-dwmblocks}"
+    } &
     exit
-    }
+}
 
 printprices() { # Print/format all prices
     for x in "$dir"/*; do
@@ -30,12 +34,15 @@ printprices() { # Print/format all prices
         info="$(cut -d';' -f-2 --output-delimiter=' ' "$x")"
         printf "%s$%0.2f " "$info"
     done | sed 's/ $/\n/'
-    }
+}
 
-[ ! -d "$dir" ] && mkdir -p "$dir" && { getprices; exit ;}
+[ ! -d "$dir" ] && mkdir -p "$dir" && {
+    getprices
+    exit
+}
 
 # If currencies haven't been updated today, try to update them.
 [ "$(stat -c %x "$HOME/.local/share/crypto-prices" | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
-    { ping -q -c 1 example.org >/dev/null 2>&1 && getprices || exit ;}
+    { ping -q -c 1 example.org >/dev/null 2>&1 && getprices || exit; }
 
 printprices

@@ -5,6 +5,6 @@
 
 sleep 5
 
-while : ; do
-	mpc idle >/dev/null && kill -45 "$(pidof "${STATUSBAR:-dwmblocks}")" || break
+while :; do
+    mpc idle >/dev/null && kill -45 "$(pidof "${STATUSBAR:-dwmblocks}")" || break
 done

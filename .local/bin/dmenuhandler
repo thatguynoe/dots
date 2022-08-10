@@ -4,11 +4,11 @@
 # some choice programs to use to open it.
 
 case "$(printf "Copy URL\\nmpv\\nmpv (loop)\\nmpv (float)\\nqueue download\\nqueue youtube-dl\\nbrowser" | dmenu -i -p "Open link with what program?")" in
-	"Copy URL") echo "$1" | xclip -selection clipboard ;;
-	mpv) setsid -f mpv -quiet "$1" >/dev/null 2>&1 ;;
-	"mpv (loop)") setsid -f mpv -quiet --loop "$1" >/dev/null 2>&1 ;;
-	"mpv (float)") setsid -f mpv --geometry=+0-0 --autofit=30%  --title="mpvfloat" "$1" >/dev/null 2>&1 ;;
-	"queue download") tsp curl -LO "$1" >/dev/null 2>&1 ;;
-	"queue yt-dlp") tsp yt-dlp --write-metadata -ic "$1" >/dev/null 2>&1 ;;
-	browser) setsid -f "$BROWSER" "$1" >/dev/null 2>&1 ;;
+"Copy URL") echo "$1" | xclip -selection clipboard ;;
+mpv) setsid -f mpv -quiet "$1" >/dev/null 2>&1 ;;
+"mpv (loop)") setsid -f mpv -quiet --loop "$1" >/dev/null 2>&1 ;;
+"mpv (float)") setsid -f mpv --geometry=+0-0 --autofit=30% --title="mpvfloat" "$1" >/dev/null 2>&1 ;;
+"queue download") tsp curl -LO "$1" >/dev/null 2>&1 ;;
+"queue yt-dlp") tsp yt-dlp --write-metadata -ic "$1" >/dev/null 2>&1 ;;
+browser) setsid -f "$BROWSER" "$1" >/dev/null 2>&1 ;;
 esac

@@ -3,5 +3,7 @@
 # Refreshes the weather, moonphase and updates dwmblocks.
 
 rm ${XDG_DATA_HOME:-$HOME/.local/share}/moonphase ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport >/dev/null 2>&1
-moonphase >/dev/null 2>&1 ; weather >/dev/null 2>&1
-pkill -RTMIN+5 dwmblocks ; pkill -RTMIN+17 dwmblocks
+moonphase >/dev/null 2>&1
+weather >/dev/null 2>&1
+pkill -RTMIN+5 dwmblocks
+pkill -RTMIN+17 dwmblocks

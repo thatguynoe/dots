@@ -2,7 +2,7 @@
 
 # Syncs repositories and downloads updates, meant to be run as a cronjob.
 
-ping -q -c 1 example.org > /dev/null || exit
+ping -q -c 1 example.org >/dev/null || exit
 
 notify-send "📦 Repository Sync" "Checking for package updates..."
 
@@ -11,8 +11,7 @@ sudo pacman -Syuw --noconfirm || notify-send "Error downloading updates.
 Check your internet connection, if pacman is already running, or run update manually to see errors."
 pkill -RTMIN+8 "${STATUSBAR:-dwmblocks}"
 
-if pacman -Qu | grep -v "\[ignored\]"
-then
+if pacman -Qu | grep -v "\[ignored\]"; then
     notify-send "🎁 Repository Sync" "Updates available."
 else
     notify-send "📦 Repository Sync" "No new packages for update."
