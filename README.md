@@ -22,9 +22,9 @@ My dotfiles are heavily inspired by [Luke Smith's dotfiles](https://github.com/L
 
 These dotfiles are intended to go with numerous suckless programs I use:
 
-* [dwm](https://github.com/thatguynoe/dwm)
-* [dwmblocks](https://github.com/thatguynoe/dwmblocks)
-* [st](https://github.com/thatguynoe/st)
+* [dwm](https://github.com/thatguynoe/dwm) (window manager)
+* [dwmblocks](https://github.com/thatguynoe/dwmblocks) (statusbar)
+* [st](https://github.com/thatguynoe/st) (terminal emulator)
 
 ## Install these dotfiles and all dependencies
 
