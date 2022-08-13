@@ -296,10 +296,10 @@ autocmd! InsertEnter * call feedkeys("\<Cmd>nohlsearch\<cr>" , 'n')
 " Runs a script that cleans out tex build files whenever exiting a .tex file.
 autocmd BufWipeout,VimLeave *.tex !texclear "%"
 
-let g:tex_flavor = 'latex'
-let g:vimtex_quickfix_mode = 0
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_forward_search_on_start = 0
+let g:vimtex_compiler_latexmk = { 'options' : [ '-synctex=0' ] }
 let g:vimtex_indent_enabled = 0
-let g:vimtex_view_automatic = 0
 
 " TREESITTER:
 lua << EOF
