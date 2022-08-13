@@ -28,7 +28,7 @@ cmd open ${{
         text/docx) onlyoffice-desktopeditors $fx >/dev/null 2>&1;;
         image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
         image/svg+xml) display -- $f ;;
-        image/*) nsxiv-rifle $f ;;
+        image/*) nsxiv-rifle $f ; sleep 0.01 ;;
         audio/*) mpv --audio-display=no $f ;;
         video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
         *) for f in $fx ; do setsid -f $OPENER $f >/dev/null 2>&1 ; done ;;
