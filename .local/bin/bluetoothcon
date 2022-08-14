@@ -3,13 +3,13 @@
 # This script displays a dmenu prompt for paired bluetooth devices and connects
 # to a chosen device.
 
-devices=$(bluetoothctl paired-devices | cut -d' ' -f3-)
+devices=$(bluetoothctl devices Paired | cut -d' ' -f3-)
 [ -z "$devices" ] && exit 1
 
 # Turn the controller power on if off.
 [ $(bluetoothctl show | grep "Powered" | cut -d' ' -f2) = "no" ] && bluetoothctl power on
 
 chosen_device=$(echo "$devices" | dmenu -i -p "Connect to which device?")
-chosen_add=$(bluetoothctl paired-devices | grep -w "$chosen_device" | cut -d' ' -f2)
+chosen_add=$(bluetoothctl devices Paired | grep -w "$chosen_device" | cut -d' ' -f2)
 
 bluetoothctl connect "$chosen_add" && notify-send "Connected to $chosen_device"
