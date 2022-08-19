@@ -262,7 +262,7 @@ set noswapfile
 set clipboard+=unnamedplus
 
 " Enable mouse support.
-set mouse=a
+set mouse=nvc
 
 " Configure netrw.
 let g:netrw_liststyle = 3
