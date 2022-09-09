@@ -20,6 +20,7 @@ vnoremap < <gv
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 
@@ -65,9 +66,6 @@ nnoremap <silent> <Leader>f :update <bar> silent !compiler "%"<cr>
 " Open output.
 nnoremap <silent> <Leader>j :silent !opout "%"<cr>
 
-" Goyo mapping.
-nnoremap <silent> <Leader>g :Goyo<cr>
-
 " netrw mapping.
 nnoremap <silent> <C-n> :Vexplore<cr>
 
@@ -100,7 +98,7 @@ Plug 'nvim-lualine/lualine.nvim'                            " statusline
 Plug 'jreybert/vimagit'                                     " git integration
 Plug 'tpope/vim-surround'                                   " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                                 " better comment manipulation
-Plug 'junegunn/goyo.vim'                                    " distraction free editing
+Plug 'folke/zen-mode.nvim'                                  " distraction free editing
 Plug 'junegunn/vim-easy-align'                              " aligns text
 Plug 'unblevable/quick-scope'                               " better line navigation
 Plug 'psliwka/vim-smoothie'                                 " smooth scrolling
@@ -151,8 +149,19 @@ EOF
 " MAGIT:
 nnoremap <silent> <Leader>m :Magit<cr>
 
-" GOYO:
-autocmd! User GoyoLeave nested highlight Normal guibg=NONE
+" ZENMODE:
+lua << EOF
+  require("zen-mode").setup {
+    window = {
+      backdrop = -1,
+      width = 80,
+      height = 0.85,
+      options = { number = false, relativenumber = false }
+    }
+  }
+EOF
+
+nnoremap <silent> <Leader>g :ZenMode<cr>
 
 " SMOOTHIE:
 " Even smoother settings.
@@ -274,9 +283,9 @@ let g:netrw_winsize = 20
 " Ignore some filetypes.
 set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux
 
-" Enable Goyo by default for mutt and markdown writing
-autocmd VimEnter /tmp/neomutt*,*.md :Goyo
-autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> ZZ :Goyo <bar> x!<cr>
+" Enable ZenMode by default for mutt and markdown writing
+autocmd VimEnter /tmp/neomutt*,*.md :ZenMode
+autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> ZZ :close <bar> x!<cr>
 
 " When shortcut files are updated, update shortcuts with new material:
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
