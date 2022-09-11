@@ -11,9 +11,6 @@ tnoremap <Esc> <C-\><C-n>
 " Mapping for quitting quickly (and unmap Q for Ex mode).
 nnoremap <silent> Q :qa!<cr>
 
-" Open a terminal.
-nnoremap <silent> <Leader>t :10sp <bar> terminal<cr>
-
 " Keep selection after tabbing and remap <TAB> to tab.
 vnoremap > >gv
 vnoremap < <gv
@@ -265,6 +262,81 @@ autocmd BufWritePre * call TrimWhiteSpace()
 
 " Remove swap files.
 set noswapfile
+
+" The following variables and functions make nvim's terminal more comfortable
+" by providing functionality to toggle a terminal and execute code in a
+" terminal. It also reuses an open terminal to run commands.
+let s:terminal_window = -1
+let s:terminal_buffer = -1
+let s:terminal_job_id = -1
+
+function! TerminalOpen()
+    " Check if buffer exists, if not create a window and a buffer
+    if !bufexists(s:terminal_buffer)
+        " Creates a window call terminal
+        new terminal
+
+        " Moves to the window the right the current one
+        wincmd J
+        resize 15
+        let s:terminal_job_id = termopen($SHELL, { 'detach': 1 })
+
+        " Change the name of the buffer to `Terminal`
+        silent file Terminal
+
+        " Gets the id of the terminal window
+        let s:terminal_window = win_getid()
+        let s:terminal_buffer = bufnr('%')
+
+        " The buffer of the terminal won't appear in the list of the buffers
+        " when calling :buffers command
+        set nobuflisted
+    else
+        if !win_gotoid(s:terminal_window)
+            sp
+
+            " Moves to the window below the current one
+            wincmd J
+            resize 15
+            buffer Terminal
+
+            " Gets the id of the terminal window
+            let s:terminal_window = win_getid()
+        endif
+    endif
+
+    " No line numbers
+    set nonumber norelativenumber
+endfunction
+
+function! TerminalClose()
+    if win_gotoid(s:terminal_window)
+        " Close the current window
+        hide
+    endif
+endfunction
+
+function! TerminalToggle()
+    if win_gotoid(s:terminal_window)
+        call TerminalClose()
+    else
+        call TerminalOpen()
+    endif
+endfunction
+
+function! TerminalExec(cmd)
+    if !win_gotoid(s:terminal_window)
+        call TerminalOpen()
+    endif
+
+    " Run command
+    call jobsend(s:terminal_job_id, a:cmd . "\n")
+    normal! G
+    wincmd p
+endfunction
+
+" Toggle a terminal.
+nnoremap <silent> <Leader>t :call TerminalToggle()<cr>
 
 " MISCELLANEOUS:
 " Enables a global clipboard.
