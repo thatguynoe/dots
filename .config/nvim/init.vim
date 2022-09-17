@@ -207,6 +207,7 @@ colorscheme gruvbox
 
 " Enable background transparency.
 highlight Normal guibg=NONE
+highlight VertSplit guibg=NONE
 
 " Set title.
 set title titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
