@@ -366,7 +366,7 @@ autocmd BufWritePost bm-files,bm-dirs !shortcuts
 " Automatically recompile suckless software on save.
 autocmd BufWritePost ~/.local/src/dwm/config.h !cd ~/.local/src/dwm/ ; sudo make install
 autocmd BufWritePost ~/.local/src/st/config.h !cd ~/.local/src/st/ ; sudo make install
-autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/ ; sudo make install && { killall -q dwmblocks ; setsid dwmblocks & }
+autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/ ; sudo make clean install && { killall -q dwmblocks ; setsid -f dwmblocks }
 
 " Automatically source init.vim on save.
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
