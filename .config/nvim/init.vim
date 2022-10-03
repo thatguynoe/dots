@@ -150,11 +150,16 @@ nnoremap <silent> <Leader>m :Magit<cr>
 lua << EOF
   require("zen-mode").setup {
     window = {
-      backdrop = -1,
+      backdrop = 1,
       width = 80,
       height = 0.85,
       options = { number = false, relativenumber = false }
-    }
+    },
+
+    -- Keep transparency
+    on_open = function(win)
+      vim.cmd[[highlight ZenBg guibg=NONE]]
+    end,
   }
 EOF
 
