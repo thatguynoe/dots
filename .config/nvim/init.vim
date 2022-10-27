@@ -229,6 +229,9 @@ set splitright splitbelow
 set ignorecase smartcase
 
 " EDITING:
+" Change mousescroll speed.
+set mousescroll=ver:2,hor:2
+
 set expandtab       " Converts tabs into spaces
 set tabstop=4       " Sets tabbing to 4 spaces
 set softtabstop=4   " Sets normal mode tabbing to 4 spaces
