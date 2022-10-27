@@ -129,7 +129,7 @@ function Spell()
   return vim.api.nvim_get_option('spelllang')
 end
 
-require'lualine'.setup {
+require("lualine").setup {
   options = {
     icons_enabled = false,
   },
@@ -407,7 +407,7 @@ EOF
 " Note: LSP should be instantiated after your colorscheme
 lua << EOF
   local luasnip = require("luasnip")
-  local cmp = require'cmp'
+  local cmp = require("cmp")
 
   cmp.setup({
     snippet = {
