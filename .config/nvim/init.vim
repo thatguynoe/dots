@@ -306,7 +306,7 @@ function! TerminalOpen()
 
             " Moves to the window below the current one
             wincmd J
-            resize 15
+            resize 10
             buffer Terminal
 
             " Gets the id of the terminal window
