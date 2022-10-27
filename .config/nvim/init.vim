@@ -287,7 +287,7 @@ function! TerminalOpen()
 
         " Moves to the window the right the current one
         wincmd J
-        resize 15
+        resize 10
         let s:terminal_job_id = termopen($SHELL, { 'detach': 1 })
 
         " Change the name of the buffer to `Terminal`
