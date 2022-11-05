@@ -380,6 +380,13 @@ lua << EOF
   local cmp = require("cmp")
 
   cmp.setup({
+    enabled = function()
+      -- Disable completion in comments
+      local context = require 'cmp.config.context'
+      return not context.in_treesitter_capture("comment")
+        and not context.in_syntax_group("Comment")
+    end,
+
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
