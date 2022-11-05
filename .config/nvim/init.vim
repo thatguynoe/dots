@@ -363,7 +363,7 @@ let g:vimtex_indent_enabled = 0
 " TREESITTER:
 lua << EOF
 require("nvim-treesitter.configs").setup {
-  ensure_installed = { "c", "cpp", "lua", "python", "html" },
+  ensure_installed = { "vim", "help", "c", "cpp", "lua", "python", "html" },
   highlight = {
     enable = true,
   },
