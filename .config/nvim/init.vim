@@ -25,25 +25,6 @@ nnoremap <S-Tab> <<
 nnoremap <C-A-j> gj
 nnoremap <C-A-k> gk
 
-" Function for toggling the bottom statusbar:
-let s:hidden_all_bar = 0
-function! ToggleBar()
-    if s:hidden_all_bar == 0
-        let s:hidden_all_bar = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all_bar = 0
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-
-nnoremap <silent> <leader>h :call ToggleBar()<cr>
-
 " Spellchecker mapping.
 nnoremap <silent> <Leader>o :set spell!<cr>
 
@@ -62,12 +43,6 @@ nnoremap <silent> <Leader>f :update <bar> silent !compiler "%"<cr>
 
 " Open output.
 nnoremap <silent> <Leader>j :silent !opout "%"<cr>
-
-" netrw mapping.
-nnoremap <silent> <C-n> :Vexplore<cr>
-
-" FZF mapping.
-nnoremap <silent> <Leader>e :FZF<cr>
 
 " Easier navigation of splits.
 nnoremap <C-j> <C-w><C-j>
@@ -96,7 +71,6 @@ Plug 'jreybert/vimagit'                                     " git integration
 Plug 'tpope/vim-surround'                                   " better {} [] () manipulation
 Plug 'tpope/vim-commentary'                                 " better comment manipulation
 Plug 'folke/zen-mode.nvim'                                  " distraction free editing
-Plug 'junegunn/vim-easy-align'                              " aligns text
 Plug 'unblevable/quick-scope'                               " better line navigation
 Plug 'psliwka/vim-smoothie'                                 " smooth scrolling
 Plug 'morhetz/gruvbox'                                      " colorscheme
@@ -180,13 +154,6 @@ augroup qs_colors
     autocmd ColorScheme * highlight QuickScopePrimary guifg='#5fffff' gui=bold
     autocmd ColorScheme * highlight QuickScopeSecondary guifg='#259e3d' gui=bold
 augroup END
-
-" EASYALIGN:
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
 
 " VISUAL:
 " Enable filetype specific mappings and more.
