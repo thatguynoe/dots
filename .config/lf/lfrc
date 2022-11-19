@@ -1,5 +1,5 @@
 # Basic Settings
-set shell zsh
+set shell "zsh"
 set shellopts "-euy"
 set ifs "\n"
 set scrolloff 10
