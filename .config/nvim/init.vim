@@ -73,6 +73,7 @@ Plug 'tpope/vim-commentary'                                 " better comment man
 Plug 'folke/zen-mode.nvim'                                  " distraction free editing
 Plug 'unblevable/quick-scope'                               " better line navigation
 Plug 'psliwka/vim-smoothie'                                 " smooth scrolling
+Plug 'romainl/vim-cool'                                     " disable search highlighting when finished
 Plug 'morhetz/gruvbox'                                      " colorscheme
 
 call plug#end()
@@ -346,9 +347,6 @@ autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/
 
 " Automatically source init.vim on save.
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
-
-" Call :nohlsearch when entering insert mode.
-autocmd! InsertEnter * call feedkeys("\<Cmd>nohlsearch\<cr>" , 'n')
 
 " LaTeX:
 " Runs a script that cleans out tex build files whenever exiting a .tex file.
