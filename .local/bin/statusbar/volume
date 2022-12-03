@@ -2,18 +2,26 @@
 
 # Prints the current volume or 🔇 if muted.
 
-[ $(pamixer --get-mute) = true ] && echo 🔇 && exit
+vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
 
-vol="$(pamixer --get-volume)"
+# If muted, print 🔇 and exit.
+[ "$vol" != "${vol%\[MUTED\]}" ] && echo 🔇 && exit
 
-if [ "$vol" -gt "66" ]; then
-    icon="🔊"
-elif [ "$vol" -gt "33" ]; then
-    icon="🔉"
-elif [ "$vol" -gt "0" ]; then
-    icon="🔈"
-else
-    echo 🔇 && exit
-fi
+vol="${vol#Volume: }"
+split() {
+	# For ommiting the . without calling an external program.
+	IFS=$2
+	set -- $1
+	printf '%s' "$@"
+}
+vol="$(split "$vol" ".")"
+vol="${vol##0}"
+
+case 1 in
+	$((vol >= 67)) ) icon="🔊" ;;
+	$((vol >= 33)) ) icon="🔉" ;;
+	$((vol >= 1)) ) icon="🔈" ;;
+	* ) echo 🔇 && exit ;;
+esac
 
 echo "$icon $vol%"
