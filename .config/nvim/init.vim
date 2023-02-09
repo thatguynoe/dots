@@ -351,14 +351,14 @@ autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 lua << EOF
   vim.on_key(function(char)
     if vim.fn.mode() == "n" then
-      vim.opt.hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
+      vim.opt.hlsearch = vim.tbl_contains({ "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
     end
   end, vim.api.nvim_create_namespace "auto_hlsearch")
 EOF
 
 " LaTeX:
 " Runs a script that cleans out tex build files whenever exiting a .tex file.
-autocmd BufWipeout,VimLeave *.tex !texclear "%"
+autocmd BufDelete,VimLeave *.tex silent! !texclear "%"
 
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_view_forward_search_on_start = 0
