@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Rerun the remaps script whenever a new input device is added.
-
-while :; do
-    remaps
-    dmesg -W -f kern | grep "input:" -q
-    sleep 1
-done
