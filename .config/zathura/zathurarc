@@ -1,7 +1,6 @@
 set sandbox none
 set statusbar-h-padding 0
 set statusbar-v-padding 0
-set adjust-open width
 set selection-clipboard clipboard
 set window-title-basename true
 set statusbar-home-tilde true
