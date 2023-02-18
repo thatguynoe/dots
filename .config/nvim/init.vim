@@ -86,7 +86,6 @@ lua << EOF
 require("toggleterm").setup{
   size = 10,
   shade_terminals = false,
-  start_in_insert = true,
 }
 
 function _G.set_terminal_keymaps()
