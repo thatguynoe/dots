@@ -78,7 +78,7 @@ Plug 'morhetz/gruvbox'                                      " colorscheme
 
 call plug#end()
 
-" Toggleterm:
+" TOGGLETERM:
 " Toggle a terminal.
 nnoremap <silent> <Leader>t :ToggleTerm<cr>
 
