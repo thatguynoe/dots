@@ -150,7 +150,6 @@ lua << EOF
       backdrop = 1,
       width = 80,
       height = 0.85,
-      options = { number = false, relativenumber = false }
     },
 
     -- Keep transparency
