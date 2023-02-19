@@ -33,3 +33,6 @@ function TrimWhiteSpace()
 endfunction
 
 autocmd BufWritePre * call TrimWhiteSpace()
+
+" Disable swap files.
+set noswapfile
