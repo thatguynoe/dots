@@ -5,7 +5,7 @@ let maplocalleader = "\<Space>"
 " Exit terminal mode.
 tnoremap <Esc> <C-\><C-n>
 
-" Mapping for quitting quickly (and unmap Q for Ex mode).
+" Quit quickly (and unmap Q for Ex mode).
 nnoremap <silent> Q :qa!<cr>
 
 " Keep selection after tabbing and remap <TAB> to tab.
@@ -22,17 +22,17 @@ nnoremap <S-Tab> <<
 nnoremap <C-A-j> gj
 nnoremap <C-A-k> gk
 
-" Spellchecker mapping.
+" Spellchecker.
 nnoremap <silent> <Leader>o :set spell!<cr>
 
-" Mappings to navigate buffers.
+" Navigate between buffers.
 nnoremap <silent> <Leader>b :ls<cr>:buffer<Space>
 nnoremap <silent> <Leader>d :bdelete!<cr>
 
-" Replace all mapping.
+" Replace all.
 nnoremap <Leader>r :%s//g<Left><Left>
 
-" Save mapping.
+" Save file.
 nnoremap <silent> <Leader>w :update<cr>
 
 " Execute the compiler script.

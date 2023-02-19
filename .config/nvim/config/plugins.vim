@@ -10,7 +10,7 @@ Plug 'lervag/vimtex'                                        " better LaTeX suppo
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}               " comfy terminal
 Plug 'nvim-lualine/lualine.nvim'                            " statusline
 Plug 'jreybert/vimagit'                                     " git integration
-Plug 'tpope/vim-surround'                                   " better {} [] () manipulation
+Plug 'tpope/vim-surround'                                   " better delimiter manipulation
 Plug 'tpope/vim-commentary'                                 " better comment manipulation
 Plug 'folke/zen-mode.nvim'                                  " distraction free editing
 Plug 'unblevable/quick-scope'                               " better line navigation
@@ -71,11 +71,11 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 EOF
 
 " LUALINE:
-" Disables -- INSERT -- and more in the command line.
+" Disables -- INSERT -- and similar text in the command line.
 set noshowmode
 
 lua << EOF
--- Display 'MI' when both tab and spaces are used for indenting the current buffer
+-- Display 'MI' when both tab and spaces are used for indenting the current buffer.
 function MixedIndent()
   local space_indent = vim.fn.search([[\v^ +]], 'nw') > 0
   local tab_indent = vim.fn.search([[\v^\t+]], 'nw') > 0
@@ -84,7 +84,7 @@ function MixedIndent()
   return mixed and 'MI' or ''
 end
 
--- Display what 'spelllang' is set to when spellchecking is active
+-- Display what 'spelllang' is set to when spellchecking is active.
 function Spell()
   if not vim.wo.spell then
     return ''
@@ -108,6 +108,7 @@ require("lualine").setup {
 EOF
 
 " MAGIT:
+" Open magit.
 nnoremap <silent> <Leader>m :Magit<cr>
 
 " ZENMODE:
@@ -126,13 +127,14 @@ lua << EOF
   }
 EOF
 
+" Enter ZenMode.
 nnoremap <silent> <Leader>g :ZenMode<cr>
 
 " QUICKSCOPE:
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" Modify colors:
+" Modify colors.
 augroup qs_colors
     autocmd!
     autocmd ColorScheme * highlight QuickScopePrimary guifg='#5fffff' gui=bold

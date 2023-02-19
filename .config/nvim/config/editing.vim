@@ -1,10 +1,10 @@
 " Change mousescroll speed.
 set mousescroll=ver:2,hor:2
 
-set expandtab       " Converts tabs into spaces
-set tabstop=4       " Sets tabbing to 4 spaces
-set softtabstop=4   " Sets normal mode tabbing to 4 spaces
-set shiftwidth=4    " Sets tabbing to 4 spaces
+set expandtab       " Use spaces, not tabs.
+set tabstop=4       " Sets tabbing to 4 spaces.
+set softtabstop=4   " A tab key indents 4 spaces.
+set shiftwidth=4    " Sets normal mode tabbing to 4 spaces.
 
 " Set smarter indentation.
 set smartindent
