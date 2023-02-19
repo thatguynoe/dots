@@ -1,2 +1,2 @@
-" Update, compile, and execute code in terminal.
+" Update, compile, and execute code in the terminal.
 nnoremap <buffer> <silent> <Leader>f :update <bar> TermExec cmd="compiler %"<cr>
