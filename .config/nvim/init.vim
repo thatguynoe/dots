@@ -74,7 +74,7 @@ Plug 'tpope/vim-commentary'                                 " better comment man
 Plug 'folke/zen-mode.nvim'                                  " distraction free editing
 Plug 'unblevable/quick-scope'                               " better line navigation
 Plug 'psliwka/vim-smoothie'                                 " smooth scrolling
-Plug 'morhetz/gruvbox'                                      " colorscheme
+Plug 'lifepillar/vim-gruvbox8'                              " colorscheme
 
 call plug#end()
 
@@ -128,6 +128,7 @@ end
 require("lualine").setup {
   options = {
     icons_enabled = false,
+    theme = 'gruvbox'
   },
   sections = {
     lualine_c = {
@@ -194,10 +195,9 @@ set number relativenumber
 set signcolumn=number
 
 " Set theme.
-let g:gruvbox_invert_selection = 0
-let g:gruvbox_italic = 1
-let g:gruvbox_italicize_comments = 0
-colorscheme gruvbox
+let g:gruvbox_italicize_strings = 0
+colorscheme gruvbox8
+highlight EndOfBuffer guifg='#504945'
 
 " Enable background transparency.
 highlight Normal guibg=NONE
