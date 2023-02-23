@@ -86,6 +86,7 @@ map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
 
 map u :unselect; clear
 map V push :nvim<space>
+map mg $nvim -c MagitOnly
 map b $setbg $f
 map `` push :mark-load<enter>'
 
@@ -93,7 +94,7 @@ map `` push :mark-load<enter>'
 map A rename # at the very end
 map cw push A<c-u> # new rename
 map I push A<c-a> # at the very beginning
-map a push A<a-b><a-b><a-f> # before extention
+map a push A<a-b><a-b><a-f> # before extension
 map B bulkrename
 
 # Movement
