@@ -41,7 +41,7 @@ md) if [ -x "$(command -v lowdown)" ]; then
 elif [ -x "$(command -v groffdown)" ]; then
     groffdown -i "$file" | groff >"$base.pdf"
 else
-    pandoc "$file" -o "$base".pdf &
+    pandoc -V geometry:margin=1in "$file" -o "$base".pdf &
 fi ;;
 mom) preconv "$file" | refer -PS -e | groff -mom -kept -T pdf >"$base".pdf ;;
 ms) preconv "$file" | refer -PS -e | groff -me -ms -kept -T pdf >"$base".pdf ;;
