@@ -13,7 +13,7 @@ luasnip.config.set_config {
 luasnip.add_snippets(nil, {
     tex = {
         -- LaTeX specific snippets go here.
-        luasnip.parser.parse_snippet("\\b", "\\begin{$1}\n    $0\n\\end{$1}"),
+        luasnip.parser.parse_snippet("b", "\\begin{$1}\n    $0\n\\end{$1}"),
     },
 
     markdown = {
