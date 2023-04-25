@@ -1,5 +1,5 @@
 #!/bin/sh
 
-# Displays screen brightness using xbacklight.
+# Displays screen brightness using blight.
 
-printf "💡%.0f\n" "$(xbacklight)"
+printf "💡%.0f\n" "$(printf "%s/19200 * 100\n" "$(blight get)" | bc -l)"
