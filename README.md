@@ -31,7 +31,7 @@ These dotfiles are intended to go with numerous suckless programs I use:
 My `init.vim` is split into multiple files for easier management. Consequently, grabbing my `init.vim` is tedious as you would also have to grab all the sourced files. You can run the following to combine all sourced files into one `init.vim` after cloning the repo.
 
 ```sh
-sed 's|^\([^/]*\/\)\{2\}|dots/\.config/nvim/|g' dots/.config/nvim/init.vim | xargs cat > combined_init.vim
+sed 's|^\([^/]*/\)\{2\}|dots/\.config/nvim/|g' dots/.config/nvim/init.vim | xargs cat > combined_init.vim
 ```
 
 ## Install these dotfiles and all dependencies
