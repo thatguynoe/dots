@@ -4,12 +4,12 @@ set shellopts "-euy"
 set ifs "\n"
 set scrolloff 10
 set period 1
-set incsearch on
+set incsearch true
 set tabstop 4
-set drawbox on
-set mouse on
+set drawbox true
+set mouse true
 set findlen 0
-set autoquit on
+set autoquit true
 set timefmt "01.2.2006 (Mon) 15:04:05"
 set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:*.exe:*.o:run.xml:lost+found"
 

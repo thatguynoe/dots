@@ -1,4 +1,4 @@
-local luasnip = require "luasnip"
+local luasnip = require("luasnip")
 
 luasnip.config.set_config {
     -- This tells LuaSnip to remember to keep around the last snippet.
