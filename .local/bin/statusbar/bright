@@ -2,4 +2,4 @@
 
 # Displays screen brightness using blight.
 
-printf "💡%.0f\n" "$(printf "%s/19200 * 100\n" "$(blight get)" | bc -l)"
+printf "💡%s\n" "$(printf "%s/192\n" "$(blight get)" | bc)"
