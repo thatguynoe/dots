@@ -15,6 +15,7 @@ set signcolumn=number
 
 " Set theme.
 let g:gruvbox_italicize_strings = 0
+let g:gruvbox_transp_bg = 1
 colorscheme gruvbox8
 highlight EndOfBuffer guifg='#504945'
 

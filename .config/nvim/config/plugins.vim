@@ -15,7 +15,7 @@ Plug 'tpope/vim-commentary'                                 " better comment man
 Plug 'folke/zen-mode.nvim'                                  " distraction free editing
 Plug 'unblevable/quick-scope'                               " better line navigation
 Plug 'psliwka/vim-smoothie'                                 " smooth scrolling
-Plug 'lifepillar/vim-gruvbox8'                              " colorscheme
+Plug 'lifepillar/vim-gruvbox8', {'branch' : 'neovim'}       " colorscheme
 
 call plug#end()
 
