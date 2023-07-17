@@ -1,37 +1,60 @@
 #!/bin/sh
 
-set -C -f
-IFS="$(printf '%b_' '\n')"; IFS="${IFS%_}"
-
-image() {
-    if [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && command -V ueberzug >/dev/null 2>&1; then
-        printf '{"action": "add", "identifier": "PREVIEW", "x": "%s", "y": "%s", "width": "%s", "height": "%s", "scaler": "contain", "path": "%s"}\n' "$4" "$5" "$(($2-1))" "$(($3-1))" "$1" > "$FIFO_UEBERZUG"
-        exit 1
-    else
-        mediainfo "$1"
-    fi
+draw() {
+  ~/.config/lf/drawer "$@"
+  exit 1
 }
 
-case "$(file --dereference --brief --mime-type -- "$1")" in
-    image/*) image "$1" "$2" "$3" "$4" "$5" ;;
-    text/html) lynx -width="$4" -display_charset=utf-8 -dump "$1"  ;;
-    text/troff) man ./ "$1" | col -b ;;
-    text/* | */xml | */json | */x-subrip) bat --paging=never --terminal-width "$(($4-4))" --wrap character --color=always "$1" ;;
-    application/zip) atool --list -- "$1" ;;
-    application/gzip) tar tzf "$1" ;;
-    application/x-pie-executable | application/x-object) echo "binary" ;;
-    audio/* | application/octet-stream) mediainfo "$1" || exit 1;;
-    video/*)
-        CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/lf/thumb.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}'))"
-        [ ! -f "$CACHE" ] && ffmpegthumbnailer -i "$1" -o "$CACHE" -s 0
-        image "$CACHE" "$2" "$3" "$4" "$5"
-        ;;
-    */pdf)
-        CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/lf/thumb.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}'))"
-        [ ! -f "$CACHE.jpg" ] && pdftoppm -jpeg -f 1 -singlefile "$1" "$CACHE"
-        image "$CACHE.jpg" "$2" "$3" "$4" "$5"
-        ;;
-    *opendocument*) odt2txt "$1" ;;
-    application/pgp-encrypted) gpg -d -- "$1" ;;
-esac
-exit 1
+hasher() {
+  printf '%s/.cache/lf/%s' "$HOME" \
+    "$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}')"
+}
+
+cache() {
+  if [ -f "$1" ]; then
+    draw "$@"
+  fi
+}
+
+file="$1"
+shift
+
+if [ -n "$FIFO_UEBERZUG" ]; then
+    case "$(file --dereference --brief --mime-type -- "$file")" in
+        image/*)
+          orientation="$(identify -format '%[EXIF:Orientation]\n' -- "$file")"
+          if [ -n "$orientation" ] && [ "$orientation" != 1 ]; then
+            cache="$(hasher "$file").jpg"
+            cache "$cache" "$@"
+            convert -- "$file" -auto-orient "$cache"
+            draw "$cache" "$@"
+          else
+            draw "$file" "$@"
+          fi
+          ;;
+        text/html) lynx -width="$4" -display_charset=utf-8 -dump "$file"  ;;
+        text/troff) man ./ "$file" | col -b ;;
+        text/* | */xml | */json | */x-subrip) bat --paging=never --terminal-width "$(($4-4))" --wrap character --color=always "$file" ;;
+        application/zip) atool --list -- "$file" ;;
+        application/gzip) tar tzf "$file" ;;
+        application/x-pie-executable | application/x-object) echo "binary" ;;
+        audio/* | application/octet-stream) mediainfo "$file" || exit 1;;
+        video/*)
+          cache="$(hasher "$file").jpg"
+          cache "$cache" "$@"
+          ffmpegthumbnailer -i "$file" -o "$cache" -s 0
+          draw "$cache" "$@"
+          ;;
+        */pdf)
+          cache="$(hasher "$file")"
+          cache "$cache.jpg" "$@"
+          pdftoppm -jpeg -f 1 -singlefile "$file" "$cache"
+          draw "$cache.jpg" "$@"
+          ;;
+        *opendocument*) odt2txt "$file" ;;
+        application/pgp-encrypted) gpg -d -- "$file" ;;
+    esac
+fi
+
+file -Lb -- "$1" | fold -s -w "$width"
+exit 0
