@@ -77,7 +77,6 @@ map <c-r> reload
 map <enter> shell
 map o open
 map O push :open-with<space>
-map e open
 map x :&chmod +x $f; lf -remote "send $id reload"
 map X :&ext $f
 map Z push :zip<space>
