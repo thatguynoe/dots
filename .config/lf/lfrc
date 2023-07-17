@@ -92,10 +92,10 @@ map b $setbg $f
 map `` push :mark-load<enter>'
 
 # Renaming
-map A rename # at the very end
+map A :rename; cmd-end # at the very end
 map cw push A<c-u> # new rename
-map I push A<c-a> # at the very beginning
-map a push A<a-b><a-b><a-f> # before extension
+map I :rename; cmd-home # at the very beginning
+map a :rename # before extension
 map B bulkrename
 
 # Movement
