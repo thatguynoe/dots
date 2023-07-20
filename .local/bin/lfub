@@ -2,23 +2,28 @@
 
 # This is a wrapper script for lf that allows it to create image previews with
 # ueberzug. This works in concert with the lf configuration file and the
-# lf-cleaner script.
+# cleaner script.
 
 set -e
 
-cleanup() {
-    exec 3>&-
-    rm "$FIFO_UEBERZUG"
-}
-
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    lf "$@"
+    exec lf "$@"
 else
-    [ ! -d "$HOME/.cache/lf" ] && mkdir -p "$HOME/.cache/lf"
-    export FIFO_UEBERZUG="$HOME/.cache/lf/ueberzug-$$"
+    export FIFO_UEBERZUG="${TMPDIR:-/tmp}/lf-ueberzug-$$"
+
+    cleanup() {
+        exec 3>&-
+        rm "$FIFO_UEBERZUG"
+    }
+
     mkfifo "$FIFO_UEBERZUG"
-    ueberzug layer -s -p json <"$FIFO_UEBERZUG" &
+    ueberzug layer -s <"$FIFO_UEBERZUG" -p json &
     exec 3>"$FIFO_UEBERZUG"
     trap cleanup HUP INT QUIT TERM PWR EXIT
+
+    if ! [ -d "$HOME/.cache/lf" ]; then
+        mkdir -p "$HOME/.cache/lf"
+    fi
+
     lf "$@" 3>&-
 fi
