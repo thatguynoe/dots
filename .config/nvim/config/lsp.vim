@@ -62,12 +62,15 @@ lua << EOF
     vim.keymap.set('n', 'gr', vim.lsp.buf.rename, bufopts)
   end
 
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
   local servers = { 'texlab' }
   for _, lsp in ipairs(servers) do
     require('lspconfig')[lsp].setup {
       on_attach = on_attach,
+      capabilities = capabilities
     }
   end
 EOF
