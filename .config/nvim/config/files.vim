@@ -19,4 +19,7 @@ autocmd BufWritePost ~/.local/src/dmenu/config.h !cd ~/.local/src/dmenu/ ; sudo 
 autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/ ; sudo make clean install && { killall -q dwmblocks ; setsid -f dwmblocks }
 
 " Automatically source init.vim on save.
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC
+augroup reload_vimrc
+    autocmd!
+    autocmd! BufWritePost ~/.config/nvim/config/*.vim source $MYVIMRC | redraw! | redrawstatus!
+augroup END
