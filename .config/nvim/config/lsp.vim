@@ -1,12 +1,73 @@
+" Set CmpItem colors in the completion window
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! link CmpItemKindInterface CmpItemKindVariable
+highlight! link CmpItemKindText CmpItemKindVariable
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! link CmpItemKindMethod CmpItemKindFunction
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! link CmpItemKindProperty CmpItemKindKeyword
+highlight! link CmpItemKindUnit CmpItemKindKeyword
+
 lua << EOF
   local luasnip = require("luasnip")
   local cmp = require("cmp")
+
+  local cmp_kinds = {
+    Text = ' ',
+    Method = ' ',
+    Function = ' ',
+    Constructor = ' ',
+    Field = ' ',
+    Variable = ' ',
+    Class = ' ',
+    Interface = ' ',
+    Module = '  ',
+    Property = ' ',
+    Unit = ' ',
+    Value = ' ',
+    Enum = ' ',
+    Keyword = ' ',
+    Snippet = ' ',
+    Color = ' ',
+    File = ' ',
+    Reference = ' ',
+    Folder = '  ',
+    EnumMember = '  ',
+    Constant = ' ',
+    Struct = '  ',
+    Event = ' ',
+    Operator = ' ',
+    TypeParameter = ' ',
+  }
 
   cmp.setup({
     enabled = function()
       -- Disable completion in comments
       return not require("cmp.config.context").in_syntax_group("Comment")
     end,
+
+    formatting = {
+      format = function(entry, vim_item)
+        vim_item.kind = (cmp_kinds[vim_item.kind] or '') .. vim_item.kind
+
+        -- Source
+        vim_item.menu = ({
+          nvim_lsp = "[LSP]",
+          luasnip = "[LuaSnip]",
+          omni = "[Omni]",
+          buffer = "[Buffer]",
+        })[entry.source.name]
+        return vim_item
+      end,
+    },
 
     snippet = {
       expand = function(args)
