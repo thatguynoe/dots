@@ -26,9 +26,12 @@ set completeopt=menuone,noinsert,noselect
 " TREESITTER:
 lua << EOF
 require("nvim-treesitter.configs").setup {
-  ensure_installed = { "vim", "help", "c", "cpp", "lua", "python", "html" },
+  ensure_installed = { "vim", "vimdoc", "c", "cpp", "lua", "python", "html" },
   highlight = {
     enable = true,
+  },
+  indent = {
+    enable = false,
   },
 }
 EOF
