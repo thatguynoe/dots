@@ -3,6 +3,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 Plug 'neovim/nvim-lspconfig'                                " neovim LSP
 Plug 'hrsh7th/nvim-cmp'                                     " neovim autocompletion
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'                                   " neovim buffer completion
 Plug 'L3MON4D3/LuaSnip'                                     " snippets
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " syntax highlighting
