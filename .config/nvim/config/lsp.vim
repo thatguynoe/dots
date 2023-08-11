@@ -19,6 +19,15 @@ lua << EOF
         documentation = cmp.config.window.bordered(),
     },
 
+    sorting = {
+        comparators = {
+            cmp.config.compare.recently_used,
+            cmp.config.compare.score,
+            cmp.config.compare.offset,
+            cmp.config.compare.order,
+        },
+    },
+
     mapping = {
       ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
       ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
