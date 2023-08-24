@@ -24,7 +24,7 @@ cmd open ${{
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
         application/x-pie-executable | application/x-object) lf -remote "send echo Cannot open binaries." ;;
-        text/* | */json | */x-abook-addressbook | */x-empty | */x-subrip) clear & $EDITOR $fx ;;
+        text/* | */json | */x-abook-addressbook | */x-empty | */x-subrip | */javascript) clear & $EDITOR $fx ;;
         text/docx) onlyoffice-desktopeditors $fx >/dev/null 2>&1;;
         image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
         image/svg+xml) display -- $f ;;

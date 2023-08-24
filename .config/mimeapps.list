@@ -8,6 +8,7 @@ text/x-shellscript=text.desktop;
 text/plain=text.desktop;
 application/json=text.desktop;
 application/x-abook-addressbook=text.desktop;
+application/javascript=text.desktop;
 
 # PDF's
 application/postscript=pdf.desktop;
