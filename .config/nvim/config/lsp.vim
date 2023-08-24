@@ -125,6 +125,7 @@ lua << EOF
 
     -- Open diagnostic, and go to next and previous diagnostics
     vim.keymap.set('n', '<Leader>a', vim.diagnostic.open_float, bufopts)
+    vim.keymap.set('n', '<Leader>e', vim.diagnostic.setqflist, bufopts)
     vim.keymap.set('n', ']e', vim.diagnostic.goto_next, bufopts)
     vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, bufopts)
 
