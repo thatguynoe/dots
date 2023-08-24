@@ -5,7 +5,7 @@ Plug 'hrsh7th/nvim-cmp'                                     " neovim autocomplet
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-omni'                                     " neovim omnicompletion
 Plug 'hrsh7th/cmp-buffer'                                   " neovim buffer completion
-Plug 'L3MON4D3/LuaSnip'                                     " snippets
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*'}                    " snippets
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " syntax highlighting
 Plug 'lervag/vimtex'                                        " better LaTeX support
