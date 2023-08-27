@@ -23,4 +23,9 @@ augroup reload_vimrc
     autocmd!
     autocmd! BufWritePost ~/.config/nvim/config/*.vim source $MYVIMRC | redraw!
 augroup END
+
+" Automatically refresh snippets when editing.
+augroup reload_snippets
+    autocmd!
+    autocmd! BufWritePost ~/.config/nvim/snippets/*.lua lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})
 augroup END
