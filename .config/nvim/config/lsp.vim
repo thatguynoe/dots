@@ -82,7 +82,6 @@ lua << EOF
 
     sorting = {
         comparators = {
-            cmp.config.compare.recently_used,
             cmp.config.compare.score,
             cmp.config.compare.offset,
             cmp.config.compare.order,
