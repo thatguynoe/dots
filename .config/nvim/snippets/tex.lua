@@ -10,7 +10,7 @@ end
 
 return {
     -- Begin/end environment
-    s({ trig = "bb", name = "\\begin ... \\end block", dscr = "Expands 'b' into a block" },
+    s({ trig = "bb", name = "\\begin ... \\end block", dscr = "Expands 'bb' into a block" },
       fmta(
          [[
            \begin{<>}
@@ -22,7 +22,7 @@ return {
     ),
 
     -- Fraction
-    s({ trig = "f", name = "Fraction", dscr = "Insert a fraction" },
+    s({ trig = "ff", name = "Fraction", dscr = "Insert a fraction" },
       fmta("\\frac{<>}{<>}", { i(1), i(2) }),
       { condition = in_mathzone }
     ),
