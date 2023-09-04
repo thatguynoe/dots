@@ -35,6 +35,7 @@ require("nvim-treesitter.configs").setup {
   indent = {
     enable = false,
   },
+  markdown_fenced_languages = { "c", "cpp", "python", "bash=sh" }
 }
 EOF
 
