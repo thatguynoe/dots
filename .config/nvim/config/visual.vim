@@ -4,9 +4,6 @@ filetype plugin on
 " Set cursor 4 lines away from the edges of the screen.
 set scrolloff=4
 
-" Enable terminal gui colors.
-set termguicolors
-
 " Show relative line numbers.
 set number relativenumber
 
