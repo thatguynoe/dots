@@ -28,7 +28,7 @@ return {
     ),
 
     -- Integral
-    s({ trig = "i", name = "Integral", dscr = "Insert an integral" },
+    s({ trig = "ii", name = "Integral", dscr = "Insert an integral" },
       fmta("\\int_<>^<> <>", {
           c(1, {
             t(""),
