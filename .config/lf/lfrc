@@ -67,7 +67,8 @@ map U
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map D delete
 map yy copy
-map yw :$echo -n $fx | xclip -selection clipboard
+map yw :$basename -a $fx | xclip -selection clipboard
+map yW :$echo -n $fx | xclip -selection clipboard
 map pp paste
 map po paste-overwrite
 
