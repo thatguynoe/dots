@@ -127,15 +127,11 @@ lua << EOF
       virtual_text = false
     })
 
-    -- Open diagnostic, and go to next and previous diagnostics
+    -- Open diagnostic
     vim.keymap.set('n', '<Leader>a', vim.diagnostic.open_float, bufopts)
     vim.keymap.set('n', '<Leader>e', vim.diagnostic.setqflist, bufopts)
-    vim.keymap.set('n', ']e', vim.diagnostic.goto_next, bufopts)
-    vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, bufopts)
 
     -- LSP Mappings
-    vim.keymap.set('n', 'K',  vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.rename, bufopts)
   end
