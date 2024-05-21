@@ -134,6 +134,10 @@ EOF
 " Enter ZenMode.
 nnoremap <silent> <Leader>g :ZenMode<cr>
 
+" Enable ZenMode by default for mutt and markdown writing.
+autocmd VimEnter /tmp/neomutt*,*.md :ZenMode
+autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> ZZ :close <bar> x!<cr>
+
 " QUICKSCOPE:
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

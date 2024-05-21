@@ -5,10 +5,6 @@ autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 " Ignore some filetypes.
 set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux
 
-" Enable ZenMode by default for mutt and markdown writing.
-autocmd VimEnter /tmp/neomutt*,*.md :ZenMode
-autocmd BufRead,BufNewFile /tmp/neomutt*,*.md nnoremap <silent> ZZ :close <bar> x!<cr>
-
 " When shortcut files are updated, update shortcuts with new material.
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
 
