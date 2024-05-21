@@ -19,6 +19,8 @@ highlight EndOfBuffer guifg='#504945'
 " Enable background transparency.
 highlight Normal guibg=NONE
 highlight VertSplit guibg=NONE
+highlight NormalFloat guibg=NONE
+highlight link FloatBorder Normal
 
 " Set title.
 set title titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
