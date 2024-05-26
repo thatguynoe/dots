@@ -7,7 +7,6 @@ Plug 'hrsh7th/cmp-omni'                                                 " neovim
 Plug 'hrsh7th/cmp-buffer'                                               " neovim buffer completion
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} " snippets
 Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'lifepillar/vim-gruvbox8', {'branch' : 'neovim'}       " colorscheme
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}             " syntax highlighting
 
 Plug 'nvim-lua/plenary.nvim'
@@ -22,6 +21,7 @@ Plug 'tpope/vim-surround'                                               " better
 Plug 'folke/zen-mode.nvim'                                              " distraction free editing
 Plug 'unblevable/quick-scope'                                           " better line navigation
 Plug 'psliwka/vim-smoothie'                                             " smooth scrolling
+Plug 'ellisonleao/gruvbox.nvim'                                         " colorscheme
 
 call plug#end()
 

@@ -11,16 +11,13 @@ set number relativenumber
 set signcolumn=number
 
 " Set theme.
-let g:gruvbox_italicize_strings = 0
-let g:gruvbox_transp_bg = 1
-colorscheme gruvbox8
-highlight EndOfBuffer guifg='#504945'
-
-" Enable background transparency.
-highlight Normal guibg=NONE
-highlight VertSplit guibg=NONE
-highlight NormalFloat guibg=NONE
-highlight link FloatBorder Normal
+lua << EOF
+require("gruvbox").setup({
+  italic = { strings = false },
+  transparent_mode = true,
+})
+EOF
+colorscheme gruvbox
 
 " Set title.
 set title titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
