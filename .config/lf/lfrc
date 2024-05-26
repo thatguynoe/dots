@@ -23,7 +23,7 @@ cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
         image/vnd.djvu|application/pdf) setsid -f zathura $fx >/dev/null 2>&1 ;;
-        application/x-pie-executable | application/x-object) lf -remote "send echo Cannot open binaries." ;;
+        application/x-pie-executable | application/x-object) lf -remote "send echo Binary cannot be opened." ;;
         text/* | */json | */x-abook-addressbook | */x-empty | */x-subrip | */javascript) clear & $EDITOR $fx || true ;;
         text/docx) onlyoffice-desktopeditors $fx >/dev/null 2>&1;;
         image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;

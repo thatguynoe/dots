@@ -37,7 +37,7 @@ if [ -n "$FIFO_UEBERZUG" ]; then
         text/* | */xml | */json | */x-subrip) bat --paging=never --terminal-width "$(($4-10))" --wrap character --color=always "$file" ;;
         application/zip) atool --list -- "$file" ;;
         application/gzip) tar tzf "$file" ;;
-        application/x-pie-executable | application/x-object) echo "binary" ;;
+        application/x-pie-executable | application/x-object) echo "Binary cannot be previewed." ;;
         audio/* | application/octet-stream) mediainfo "$file" || exit 1;;
         video/*)
           cache="$(hasher "$file").jpg"
