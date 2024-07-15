@@ -48,7 +48,7 @@ if [ -n "$FIFO_UEBERZUG" ]; then
         */pdf)
           cache="$(hasher "$file")"
           cache "$cache.jpg" "$@"
-          pdftoppm -jpeg -f 1 -singlefile "$file" "$cache"
+          pdftoppm -r 450 -jpeg -f 1 -singlefile "$file" "$cache"
           draw "$cache.jpg" "$@"
           ;;
         *opendocument*) odt2txt "$file" ;;
