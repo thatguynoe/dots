@@ -1,6 +1,14 @@
 " Runs a script that cleans out tex build files after exiting a tex file.
 autocmd BufDelete,VimLeave *.tex silent! !texclear "%"
 
+" Mapping to replace only within math environments.
+function! MathReplace(find, replace)
+    execute 's/' . a:find . '/\=vimtex#syntax#in_mathzone() ? "' . a:replace . '" : submatch(0)/g'
+endfunction
+
+vnoremap <Leader>R :call MathReplace()<Left>
+
+" Use omni as a completion source.
 lua << END
 require('cmp').setup.buffer({
  sources = {
