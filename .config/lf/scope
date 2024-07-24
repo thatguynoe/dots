@@ -34,7 +34,7 @@ if [ -n "$FIFO_UEBERZUG" ]; then
           ;;
         text/html) lynx -width="$4" -display_charset=utf-8 -dump "$file"  ;;
         text/troff) man ./ "$file" | col -b ;;
-        text/* | */xml | */json | */x-subrip) bat --paging=never --terminal-width "$(($4-10))" --wrap character --color=always "$file" ;;
+        text/* | */xml | */json | */x-subrip | */javascript) bat --paging=never --terminal-width "$(($4-10))" --wrap character --color=always "$file" ;;
         application/zip) atool --list -- "$file" ;;
         application/gzip) tar tzf "$file" ;;
         application/x-pie-executable | application/x-object) echo "Binary cannot be previewed." ;;
