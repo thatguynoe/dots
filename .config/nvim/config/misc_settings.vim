@@ -12,10 +12,10 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 20
 
 " Automatically disable search highlighting.
-lua << EOF
+lua << END
   vim.on_key(function(char)
     if vim.fn.mode() == "n" then
       vim.opt.hlsearch = vim.tbl_contains({ "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
     end
   end, vim.api.nvim_create_namespace "auto_hlsearch")
-EOF
+END

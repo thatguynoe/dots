@@ -30,7 +30,7 @@ call plug#end()
 set completeopt=menuone,noinsert,noselect
 
 " TREESITTER:
-lua << EOF
+lua << END
 require("nvim-treesitter.configs").setup {
   ensure_installed = { "vim", "vimdoc", "c", "cpp", "lua", "python", "html" },
   highlight = {
@@ -41,13 +41,13 @@ require("nvim-treesitter.configs").setup {
   },
   markdown_fenced_languages = { "c", "cpp", "python", "bash=sh" }
 }
-EOF
+END
 
 " NVIM TELESCOPE
 nnoremap <silent> <Leader>ff <cmd>Telescope find_files<cr>
 nnoremap <silent> <Leader>fb <cmd>Telescope buffers<cr>
 
-lua << EOF
+lua << END
 require('telescope').setup{
   defaults = {
     file_ignore_patterns = {
@@ -62,7 +62,7 @@ require('telescope').setup{
     }
   }
 }
-EOF
+END
 
 " VIMTEX:
 let g:vimtex_view_method = 'zathura'
@@ -80,7 +80,7 @@ let g:vimtex_env_toggle_math_map = {
 " Toggle a terminal.
 nnoremap <silent> <Leader>t :ToggleTerm<cr>
 
-lua << EOF
+lua << END
 require("toggleterm").setup {
   size = 10,
   shade_terminals = false,
@@ -95,13 +95,13 @@ function _G.set_terminal_keymaps()
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-EOF
+END
 
 " LUALINE:
 " Disables -- INSERT -- and similar text in the command line.
 set noshowmode
 
-lua << EOF
+lua << END
 -- Display 'MI' when both tab and spaces are used for indenting the current buffer.
 function MixedIndent()
   local space_indent = vim.fn.search([[\v^ +]], 'nw') > 0
@@ -134,14 +134,14 @@ require("lualine").setup {
     lualine_z = { 'location', MixedIndent },
   }
 }
-EOF
+END
 
 " MAGIT:
 " Open magit.
 nnoremap <silent> <Leader>m :Magit<cr>
 
 " ZENMODE:
-lua << EOF
+lua << END
   require("zen-mode").setup {
     window = {
       backdrop = 1,
@@ -154,7 +154,7 @@ lua << EOF
       vim.cmd[[highlight ZenBg guibg=NONE]]
     end,
   }
-EOF
+END
 
 " Enter ZenMode.
 nnoremap <silent> <Leader>g :ZenMode<cr>

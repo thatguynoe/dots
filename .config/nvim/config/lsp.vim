@@ -16,7 +16,7 @@ highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
 highlight! link CmpItemKindProperty CmpItemKindKeyword
 highlight! link CmpItemKindUnit CmpItemKindKeyword
 
-lua << EOF
+lua << END
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
@@ -143,4 +143,4 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities
   }
 end
-EOF
+END
