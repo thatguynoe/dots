@@ -13,6 +13,7 @@ map d scroll half-down
 map D toggle_page_mode
 map b toggle_statusbar
 map r reload
+map R feedkeys o<Tab><Return>
 map t snap_to_page
 map > rotate rotate-cw
 map < rotate rotate-ccw
