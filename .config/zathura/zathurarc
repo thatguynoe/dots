@@ -21,7 +21,6 @@ map J zoom out
 map H navigate previous
 map L navigate next
 map i recolor
-map S nohlsearch
 map p print
 
 map [presentation] g goto top
