@@ -132,6 +132,9 @@ require("lualine").setup {
        { Spell }
     },
     lualine_z = { 'location', MixedIndent },
+  },
+  extensions = {
+    'toggleterm'
   }
 }
 END
