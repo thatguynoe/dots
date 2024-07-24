@@ -58,7 +58,8 @@ require('telescope').setup{
       "mscz",
       "mp3",
       "xlsx",
-      "jpeg"
+      "jpeg",
+      ".git/[^h]"
     }
   }
 }
