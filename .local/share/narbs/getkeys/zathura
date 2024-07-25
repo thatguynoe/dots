@@ -10,12 +10,15 @@ zathura is the pdf/djvu reader.
     g - Top of document
     G - Bottom of document
     i - Toggle dark mode
+    b - Toggle statusbar
     f - Highlight URLS to follow
+    t - Snap to top of current page
     J/K - Zoom out/in
     H/L - Goto the previous/next page
     s - Zoom to fit width
     a - Zoom to fit height
     r - Reload document if changed
-    R - Rotate document
+    R - Open most recent document
+    >/< - Rotate document clockwise/counter-clockwise
     D - Toggle dual-page mode
     p - Print document
