@@ -1,5 +1,5 @@
-" Runs a script that cleans out tex build files after exiting a tex file.
-autocmd BufDelete,VimLeave *.tex silent! !texclear "%"
+" Clean out tex build files after exiting a tex file using latexmk.
+autocmd BufDelete,VimLeave *.tex silent! !latexmk -c "%"
 
 " Mapping to replace only within math environments.
 function! MathReplace(find, replace)
