@@ -44,8 +44,8 @@ require("nvim-treesitter.configs").setup {
 END
 
 " NVIM TELESCOPE
-nnoremap <silent> <Leader>ff <cmd>Telescope find_files<cr>
-nnoremap <silent> <Leader>fb <cmd>Telescope buffers<cr>
+nnoremap <silent> <Leader>ff :Telescope find_files<cr>
+nnoremap <silent> <Leader>fb :Telescope buffers<cr>
 
 lua << END
 require('telescope').setup{

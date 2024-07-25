@@ -11,12 +11,12 @@ set number relativenumber
 set signcolumn=number
 
 " Set theme.
-lua << EOF
+lua << END
 require("gruvbox").setup({
   italic = { strings = false },
   transparent_mode = true,
 })
-EOF
+END
 colorscheme gruvbox
 
 " Set title.
