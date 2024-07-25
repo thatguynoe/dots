@@ -102,6 +102,9 @@ END
 " Disables -- INSERT -- and similar text in the command line.
 set noshowmode
 
+" Enable a global statusline.
+set laststatus=3
+
 lua << END
 -- Display 'MI' when both tab and spaces are used for indenting the current buffer.
 function MixedIndent()
