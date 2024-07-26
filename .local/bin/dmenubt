@@ -41,7 +41,7 @@ toggle_scan() {
     scan_on &&
         pkill -f 'bluetoothctl scan on' && bluetoothctl scan off && show_menu ||
         {
-            bluetoothctl scan on &
+            bluetoothctl --timeout 5 scan on &
             notify-send 'Scanning...' && sleep 5 && show_menu
         }
 }
