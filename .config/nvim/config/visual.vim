@@ -10,15 +10,6 @@ set number relativenumber
 " Set sign column in number column.
 set signcolumn=number
 
-" Set theme.
-lua << END
-require("gruvbox").setup({
-  italic = { strings = false },
-  transparent_mode = true,
-})
-END
-colorscheme gruvbox
-
 " Set title.
 set title titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
 

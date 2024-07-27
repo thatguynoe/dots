@@ -30,8 +30,9 @@ source $XDG_CONFIG_HOME/nvim/config/plugins/treesitter.lua
 source $XDG_CONFIG_HOME/nvim/config/plugins/nvim_telescope.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/vimtex.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/toggleterm.vim
+source $XDG_CONFIG_HOME/nvim/config/plugins/quickscope.vim
+source $XDG_CONFIG_HOME/nvim/config/plugins/gruvbox.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/lualine.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/magit.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/zenmode.vim
-source $XDG_CONFIG_HOME/nvim/config/plugins/quickscope.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/smoothie.vim
