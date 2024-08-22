@@ -14,6 +14,7 @@ map D toggle_page_mode
 map b toggle_statusbar
 map r reload
 map R feedkeys o<Tab><Return>
+map S feedkeys s<S-k><S-k>
 map t snap_to_page
 map > rotate rotate-cw
 map < rotate rotate-ccw
