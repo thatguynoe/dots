@@ -20,6 +20,8 @@ lua << END
   end, vim.api.nvim_create_namespace "auto_hlsearch")
 END
 
-" Disable python 3 and perl providers.
+" Disable language several providers.
 let g:loaded_python3_provider = 0
 let g:loaded_perl_provider = 0
+let g:loaded_node_provider = 0
+let g:loaded_ruby_provider = 0
