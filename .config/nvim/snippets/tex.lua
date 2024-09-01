@@ -46,7 +46,7 @@ return {
 
     -- Math text
     s({ trig = "tt", name = "Text", dscr = "Insert text in a math environment" },
-      fmta("\\text{<>}", { i(1) }),
+      fmta("\\text{<>}", { d(1, get_visual) }),
       { condition = in_mathzone }
     ),
 
