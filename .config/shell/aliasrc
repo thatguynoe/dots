@@ -40,6 +40,7 @@ alias \
     copy="xclip -selection clipboard" \
     mp="pdfunite" \
     p="sudo pacman" \
+    rop="p -Qdtq | p -R - 2>/dev/null" \
     z="zathura" \
     e="$EDITOR" \
     v="$EDITOR"
