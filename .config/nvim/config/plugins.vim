@@ -5,6 +5,7 @@ Plug 'hrsh7th/nvim-cmp'                                                   " neov
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-omni'                                                   " neovim omnicompletion
 Plug 'hrsh7th/cmp-buffer'                                                 " neovim buffer completion
+Plug 'https://codeberg.org/FelipeLema/cmp-async-path'                     " neovim filesystem completion
 Plug 'L3MON4D3/LuaSnip', { 'tag': 'v2.*', 'do': 'make install_jsregexp' } " snippets
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }             " syntax highlighting
