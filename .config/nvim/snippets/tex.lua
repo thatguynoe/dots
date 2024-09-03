@@ -50,6 +50,11 @@ return {
       { condition = in_mathzone }
     ),
 
+    s({ trig = "rm", name = "Roman Text", dscr = "Insert upright text in a math environment" },
+      fmta("\\mathrm{<>}", { i(1) }),
+      { condition = in_mathzone }
+    ),
+
     -- Bold text
     s({ trig = "bf", name = "Bold", dscr = "Insert bold text" },
       fmta("\\textbf{<>}", { d(1, get_visual) })
