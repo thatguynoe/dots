@@ -65,6 +65,11 @@ return {
       fmta("\\textit{<>}", { d(1, get_visual) })
     ),
 
+    -- Emphasized text
+    s({ trig = "em", name = "Emphasize", dscr = "Insert emphasized text" },
+      fmta("\\emph{<>}", { d(1, get_visual) })
+    ),
+
     -- Slanted text
     s({ trig = "sl", name = "Slanted", dscr = "Insert slanted text" },
       fmta("\\textsl{<>}", { d(1, get_visual) })
