@@ -129,6 +129,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Leader>e', vim.diagnostic.setqflist, bufopts)
 
   -- LSP mappings
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.rename, bufopts)
 end
