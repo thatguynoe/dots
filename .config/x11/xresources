@@ -5,3 +5,6 @@ Nsxiv.window.background: #282828
 Nsxiv.window.foreground: #ebdbb2
 Nsxiv.bar.background: #504945
 Nsxiv.bar.foreground: #ebdbb2
+
+/* cursor size */
+Xcursor.size: 24
