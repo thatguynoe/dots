@@ -8,7 +8,7 @@ set scrolloff=4
 set number relativenumber
 
 " Set sign column in number column.
-set signcolumn=number
+set signcolumn=no
 
 " Set title.
 set title titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)

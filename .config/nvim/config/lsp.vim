@@ -144,6 +144,16 @@ local on_attach = function(client, bufnr)
     opts.border = opts.border or "single"
     return orig_util_open_floating_preview(contents, syntax, opts)
   end
+
+  -- Highlight line number instead of having icons in sign column
+  for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
+      vim.fn.sign_define("DiagnosticSign" .. diag, {
+          text = "",
+          texthl = "DiagnosticSign" .. diag,
+          linehl = "",
+          numhl = "DiagnosticSign" .. diag,
+      })
+  end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
