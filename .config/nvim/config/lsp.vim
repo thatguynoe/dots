@@ -84,8 +84,12 @@ cmp.setup({
   },
 
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered({
+      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+    }),
+    documentation = cmp.config.window.bordered({
+      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+    }),
   },
 
   sorting = {
@@ -132,6 +136,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.rename, bufopts)
+
+  -- Override floating window borders globally
+  local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+  function vim.lsp.util.open_floating_preview(contents, syntax, opts)
+    opts = opts or {}
+    opts.border = opts.border or "single"
+    return orig_util_open_floating_preview(contents, syntax, opts)
+  end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
