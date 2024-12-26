@@ -27,6 +27,10 @@ return {
       { condition = in_mathzone }
     ),
 
+    s({ trig = "se", name = "Section", dscr = "Insert a section" },
+      fmta("\\section{<>}", { i(1), })
+    ),
+
     -- Integral
     s({ trig = "ii", name = "Integral", dscr = "Insert an integral" },
       fmta("\\int_<>^<> <>", {
