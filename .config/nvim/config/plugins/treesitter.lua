@@ -1,11 +1,16 @@
 require("nvim-treesitter.configs").setup {
-  ensure_installed = { "vim", "vimdoc", "c", "cpp", "lua", "python", "html" },
+  ensure_installed = {
+    "bash", "c", "cpp", "html", "latex",
+    "lua", "markdown", "markdown_inline",
+    "python", "vim", "vimdoc"
+  },
   highlight = {
     enable = true,
+    disable = { "latex" }
   },
   indent = {
     disable = true,
     enable = { "lua" },
   },
-  markdown_fenced_languages = { "c", "cpp", "python", "bash=sh" }
+  markdown_fenced_languages = { "bash=sh", "c", "cpp", "python" }
 }
