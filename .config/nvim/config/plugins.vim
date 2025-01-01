@@ -6,6 +6,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-omni'                                                   " neovim omnicompletion
 Plug 'hrsh7th/cmp-buffer'                                                 " neovim buffer completion
 Plug 'https://codeberg.org/FelipeLema/cmp-async-path'                     " neovim filesystem completion
+Plug 'jmbuhr/otter.nvim'                                                  " neovim embedded doc completion
 Plug 'L3MON4D3/LuaSnip', { 'tag': 'v2.*', 'do': 'make install_jsregexp' } " snippets
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }             " syntax highlighting
@@ -37,3 +38,4 @@ source $XDG_CONFIG_HOME/nvim/config/plugins/lualine.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/magit.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/zenmode.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/smoothie.vim
+source $XDG_CONFIG_HOME/nvim/config/plugins/otter.lua
