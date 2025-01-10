@@ -15,7 +15,8 @@ require('telescope').setup({
       "xlsx",
       "jpeg",
       ".git/[^h]"
-    }
+    },
+    color_devicons = false,
   }
 })
 END
