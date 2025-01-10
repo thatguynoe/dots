@@ -2,8 +2,9 @@ nnoremap <silent> <Leader>ff :Telescope find_files<cr>
 nnoremap <silent> <Leader>fb :Telescope buffers<cr>
 
 lua << END
-require('telescope').setup{
+require('telescope').setup({
   defaults = {
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     file_ignore_patterns = {
       "pdf",
       "png",
@@ -16,5 +17,5 @@ require('telescope').setup{
       ".git/[^h]"
     }
   }
-}
+})
 END
