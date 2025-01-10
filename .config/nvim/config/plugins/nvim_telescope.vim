@@ -1,5 +1,6 @@
 nnoremap <silent> <Leader>ff :Telescope find_files<cr>
-nnoremap <silent> <Leader>fb :Telescope buffers<cr>
+nnoremap <silent> <Leader>fb :Telescope buffers ignore_current_buffer=true sort_mru=true<cr>
+nnoremap <silent> <Leader>s :Telescope spell_suggest<cr>
 
 lua << END
 require('telescope').setup({
