@@ -7,15 +7,18 @@ require('telescope').setup({
   defaults = {
     borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     file_ignore_patterns = {
-      "pdf",
-      "png",
-      "docx",
-      "doc",
-      "mscz",
-      "mp3",
-      "xlsx",
-      "jpeg",
-      ".git/[^h]"
+      "%.pdf",
+      "%.eps",
+      "%.png",
+      "%.jpe?g",
+      "%.[Dd]ocx?",
+      "%.mscz",
+      "%.mp[34]",
+      "%.xlsx",
+      "%.base",
+      "%.o",
+      "%.zip",
+      "^%.git/[^h]"
     },
     color_devicons = false,
   }
