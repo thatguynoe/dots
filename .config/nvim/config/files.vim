@@ -3,7 +3,7 @@ autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markd
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 
 " Ignore some filetypes.
-set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux
+set wildignore+=*.out,*.exe,*.pdf,*.doc*,*.aux,*.synctex.gz
 
 " When shortcut files are updated, update shortcuts with new material.
 autocmd BufWritePost bm-files,bm-dirs !shortcuts
