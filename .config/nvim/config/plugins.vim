@@ -13,7 +13,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }             " synt
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }               " file finder
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'lervag/vimtex'                                                      " better LaTeX support
 Plug 'akinsho/toggleterm.nvim', { 'tag' : '*' }                           " comfy terminal

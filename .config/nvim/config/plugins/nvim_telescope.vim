@@ -25,4 +25,5 @@ require('telescope').setup({
     color_devicons = false,
   }
 })
+require('telescope').load_extension('fzf')
 END
