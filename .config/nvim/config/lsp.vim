@@ -19,6 +19,7 @@ highlight! link CmpItemKindUnit CmpItemKindKeyword
 lua << END
 local luasnip = require("luasnip")
 local cmp = require("cmp")
+local telescope = require("telescope.builtin")
 
 local cmp_kinds = {
   Text = ' ',
@@ -134,8 +135,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Leader>e', vim.diagnostic.setqflist, bufopts)
 
   -- LSP mappings
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', 'gd', telescope.lsp_definitions, bufopts)
+  vim.keymap.set('n', 'gR', telescope.lsp_references, bufopts)
+  vim.keymap.set('n', 'gI', telescope.lsp_implementations, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.rename, bufopts)
 
   -- Override floating window borders globally
