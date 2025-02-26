@@ -11,12 +11,8 @@ lua << END
         -- turn off the statusline in zen mode
         laststatus = 0,
       },
+      twilight = { enabled = false },
     },
-
-    -- Keep transparency
-    on_open = function(win)
-      vim.cmd[[highlight ZenBg guibg=NONE]]
-    end,
   }
 END
 
