@@ -130,6 +130,9 @@ cmp.setup({
 local on_attach = function(client, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
 
+  -- Enable virtual text
+  vim.diagnostic.config({ virtual_text = {current_line = true} })
+
   -- Diagnostic mappings
   vim.keymap.set('n', '<Leader>a', vim.diagnostic.open_float, bufopts)
   vim.keymap.set('n', '<Leader>e', vim.diagnostic.setqflist, bufopts)
@@ -139,6 +142,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gR', telescope.lsp_references, bufopts)
   vim.keymap.set('n', 'gI', telescope.lsp_implementations, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', 'gA', vim.lsp.buf.code_action, bufopts)
 
   -- Override floating window borders globally
   local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -149,25 +153,58 @@ local on_attach = function(client, bufnr)
   end
 
   -- Highlight line number instead of having icons in sign column
-  for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
-      vim.fn.sign_define("DiagnosticSign" .. diag, {
-          text = "",
-          texthl = "DiagnosticSign" .. diag,
-          linehl = "",
-          numhl = "DiagnosticSign" .. diag,
-      })
-  end
+  vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.HINT] = '',
+      },
+      linehl = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.HINT] = '',
+      },
+      numhl = {
+        [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+        [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+        [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+        [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+      },
+    },
+  })
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'texlab', 'bashls', 'clangd', 'pyright' }
+local servers = { 'bashls', 'pyright' }
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities
   }
 end
+
+require('lspconfig').clangd.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
+}
+
+require('lspconfig').texlab.setup {
+  on_attach = on_attach,
+  capabilities = vim.tbl_extend('force', vim.lsp.protocol.make_client_capabilities(), ({
+    textDocument = {
+      hover = { contentFormat = { "plaintext" } },
+      completion = { completionItem = { documentationFormat = { "plaintext" } } }
+    }
+  })),
+}
 END

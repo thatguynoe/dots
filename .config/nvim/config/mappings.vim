@@ -52,3 +52,10 @@ nnoremap <Up> <C-w>+
 nnoremap <Down> <C-w>-
 nnoremap <Left> <C-w><
 nnoremap <Right> <C-w>>
+
+" Unmappings
+silent! nunmap grn
+silent! nunmap grr
+silent! nunmap gri
+silent! iunmap <C-s>
+silent! unmap gra
