@@ -17,7 +17,7 @@ autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/
 " Automatically source init.vim on save.
 augroup reload_vimrc
     autocmd!
-    autocmd! BufWritePost ~/.config/nvim/config/*.vim source $MYVIMRC | redraw!
+    autocmd! BufWritePost ~/.config/nvim/config/*.vim nested source $MYVIMRC | redraw!
 augroup END
 
 " Automatically refresh snippets when editing.
