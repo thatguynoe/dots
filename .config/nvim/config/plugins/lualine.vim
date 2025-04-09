@@ -4,6 +4,9 @@ set noshowmode
 " Enable a global statusline.
 set laststatus=3
 
+" Make the statusline transparent.
+highlight StatusLine guibg=NONE
+
 lua << END
 -- Display 'MI' when both tab and spaces are used for indenting the current buffer.
 function MixedIndent()
