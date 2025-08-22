@@ -8,3 +8,10 @@ let g:vimtex_env_toggle_math_map = {
     \ '$$': 'equation*',
     \ '\(': '$',
     \}
+let g:vimtex_toc_config = {
+    \ 'name': 'Table of Contents',
+    \ 'layer_status': {
+        \ 'label': 0,
+        \ 'include': 0,
+        \ },
+    \}
