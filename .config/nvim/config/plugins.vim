@@ -12,7 +12,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }             " syntax highlighting
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }               " file finder
+Plug 'nvim-telescope/telescope.nvim', { 'branch': 'master' }              " file finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'stevearc/oil.nvim'                                                  " file explorer
