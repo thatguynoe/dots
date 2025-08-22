@@ -15,6 +15,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }               " file finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
+Plug 'stevearc/oil.nvim'                                                  " file explorer
 Plug 'lervag/vimtex'                                                      " better LaTeX support
 Plug 'akinsho/toggleterm.nvim', { 'tag' : '*' }                           " comfy terminal
 Plug 'nvim-lualine/lualine.nvim'                                          " statusline
@@ -39,3 +40,4 @@ source $XDG_CONFIG_HOME/nvim/config/plugins/magit.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/zenmode.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/smoothie.vim
 source $XDG_CONFIG_HOME/nvim/config/plugins/otter.lua
+source $XDG_CONFIG_HOME/nvim/config/plugins/oil.vim

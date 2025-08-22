@@ -58,7 +58,8 @@ require("lualine").setup {
   },
 
   extensions = {
-    'toggleterm'
+    'toggleterm',
+    'oil'
   }
 }
 END
