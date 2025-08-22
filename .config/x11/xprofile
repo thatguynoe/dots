@@ -8,7 +8,7 @@ remaps &            # run the `remaps` script, switching caps/esc and more
 pipewire &          # start audio
 xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources & xrdbpid=$! # use Xresources colors/settings on startup
 
-autostart="mpd dunst redshift unclutter numlockx xcompmgr"
+autostart="mpd mpris-proxy dunst redshift unclutter numlockx xcompmgr"
 
 for program in $autostart; do
     pidof -s "$program" || "$program" &

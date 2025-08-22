@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# This loop will update the playerctl statusbar module whenever a command
+# changes the music player's status. playerctl must be running on X's start for
+# this to work.
+
+sleep 5
+
+# Start playerctld and mpd-mpris if not running
+pidof playerctld >/dev/null 2>&1 || setsid -f playerctld >/dev/null 2>&1
+pidof -x mpd-mpris >/dev/null 2>&1 || setsid -f mpd-mpris >/dev/null 2>&1
+
+format="{{title}} {{artist}} {{emoji(status)}}"
+
+playerctl -i firefox metadata --format "$format" --follow | while read -r line; do
+    kill -45 "$(pidof "${STATUSBAR:-dwmblocks}")"
+done

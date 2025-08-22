@@ -1,5 +1,13 @@
 #!/bin/sh
 
-mpc | sed "/^volume:/d;s/\\[paused\\].*/⏸/g;/\\[playing\\].*/d;/^ERROR/Q" | paste -sd ' ' -
+pidof -x pctlup >/dev/null 2>&1 || pctlup >/dev/null 2>&1 &
 
-pidof -x mpdup >/dev/null 2>&1 || mpdup >/dev/null 2>&1 &
+# Exclude specific players from being controlled by playerctl
+exclude="firefox"
+
+# Check if any media player is currently playing
+artist=$(playerctl -i "$exclude" metadata --format "{{artist}}")
+[ -z "$artist" ] && exit 0
+
+format="{{trunc(title,19)}} - {{trunc(artist,19)}} {{emoji(status)}}"
+playerctl -i "$exclude" metadata --format "$format"
