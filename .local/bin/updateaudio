@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Helper script used to update the audio component in dwmblocks. Used in a udev
+# rule that detects when a bluetooth device connects or disconnects.
+
+sleep 5 && pkill -RTMIN+10 dwmblocks
