@@ -4,11 +4,17 @@
 # changes the music player's status. playerctl must be running on X's start for
 # this to work.
 
-sleep 5
+# Start mpd-mpris if it's not already running
+until pidof -q mpd-mpris; do
+    sleep 1
+    setsid -f mpd-mpris
+done
 
-# Start playerctld and mpd-mpris if not running
-pidof playerctld >/dev/null 2>&1 || setsid -f playerctld >/dev/null 2>&1
-pidof -x mpd-mpris >/dev/null 2>&1 || setsid -f mpd-mpris >/dev/null 2>&1
+# Start playerctld if it's not already running
+until pidof -q playerctld; do
+    sleep 1
+    setsid -f playerctld
+done
 
 format="{{title}} {{artist}} {{emoji(status)}}"
 
