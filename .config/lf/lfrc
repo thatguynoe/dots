@@ -1,4 +1,10 @@
+# ==============================================================================
+# LF Configuration File
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
 # Basic Settings
+# ------------------------------------------------------------------------------
 set shell "zsh"
 set shellopts "-euy"
 set ifs "\n"
@@ -10,15 +16,22 @@ set drawbox true
 set cursorpreviewfmt "\033[7m"
 set mouse true
 set findlen 0
-set autoquit true
 set timefmt "01.2.2006 (Mon) 15:04:05"
 set hiddenfiles ".*:*.aux:*.log:*.synctex.gz:*.out:*.exe:*.o:run.xml:lost+found"
 
-# Set file previewer and cleaner
+# ------------------------------------------------------------------------------
+# File Previewer and Cleaner
+# ------------------------------------------------------------------------------
 set previewer ~/.config/lf/scope
 set cleaner ~/.config/lf/cleaner
 
-# Functions
+# ==============================================================================
+# Custom Functions
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# File Opening
+# ------------------------------------------------------------------------------
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
@@ -35,6 +48,9 @@ cmd open ${{
     esac
 }}
 
+# ------------------------------------------------------------------------------
+# File Operations
+# ------------------------------------------------------------------------------
 cmd paste-overwrite %{{
     mode=$(head -1 ~/.local/share/lf/files)
     list=$(sed 1d ~/.local/share/lf/files)
@@ -48,6 +64,7 @@ cmd paste-overwrite %{{
 }}
 
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+
 cmd nvim $nvim "$(echo $* | tr ' ' '\ ')"
 
 cmd bulkrename $printf '%s\n' $(basename -a $fx) | vidir -; lf -remote "send $id unselect"
@@ -63,7 +80,13 @@ cmd zip &{{
 
 cmd open-with %"$@" "$fx"
 
+# ==============================================================================
+# Key Bindings
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
 # Unmappings
+# ------------------------------------------------------------------------------
 map t
 map m
 map c
@@ -71,61 +94,79 @@ map y
 map p
 map U
 
+# ------------------------------------------------------------------------------
 # General Mappings
-map <c-f> $lf -remote "send $id select '$(fzf)'"
-map D delete
-map yy copy
-map yw :$basename -a $fx | xclip -selection clipboard
-map yW :$echo -n $fx | xclip -selection clipboard
-map pp paste
-map po paste-overwrite
+# ------------------------------------------------------------------------------
+map <c-f>    $lf -remote "send $id select '$(fzf)'"
+map D        delete
+map yy       copy
+map yw       :$basename -a $fx | xclip -selection clipboard
+map yW       :$echo -n $fx | xclip -selection clipboard
+map pp       paste
+map po       paste-overwrite
 
-map md push :mkdir<space>
-map cd push :cd<space>
-map <c-r> reload
-map <enter> shell
-map o open
-map O push :open-with<space>
-map x :&chmod +x $f; lf -remote "send $id reload"
-map X :&ext $f
-map Z push :zip<space>
+# ------------------------------------------------------------------------------
+# Directory and File Creation
+# ------------------------------------------------------------------------------
+map md       push :mkdir<space>
+map cd       push :cd<space>
 
-map tU !clear && du --max-depth=1 -h --apparent-size
-map tu !clear && du --max-depth=1 -h --apparent-size | sort -rh
+# ------------------------------------------------------------------------------
+# System Operations
+# ------------------------------------------------------------------------------
+map <c-r>    reload
+map <enter>  shell
+map o        open
+map O        push :open-with<space>
+map x        :&chmod +x $f; lf -remote "send $id reload"
+map X        :&ext $f
+map Z        push :zip<space>
 
-map u :unselect; clear
-map V push :nvim<space>
-map mg $nvim -c MagitOnly
-map b $setbg $f
-map `` push :mark-load<enter>'
+# ------------------------------------------------------------------------------
+# Information and Utilities
+# ------------------------------------------------------------------------------
+map tU       !clear && du --max-depth=1 -h --apparent-size
+map tu       !clear && du --max-depth=1 -h --apparent-size | sort -rh
+map u        :unselect; clear
+map V        push :nvim<space>
+map mg       $nvim -c MagitOnly
+map b        $setbg $f
+map ``       push :mark-load<enter>'
 
-# Renaming
-map A :rename; cmd-end # at the very end
-map cw push A<c-u> # new rename
-map I :rename; cmd-home # at the very beginning
-map a :rename # before extension
-map B bulkrename
+# ------------------------------------------------------------------------------
+# Renaming Operations
+# ------------------------------------------------------------------------------
+map A        :rename; cmd-end   # at the very end
+map cw       push A<c-u>        # new rename
+map I        :rename; cmd-home  # at the very beginning
+map a        :rename            # before extension
+map B        bulkrename
 
+# ------------------------------------------------------------------------------
 # Movement
-map gg top
-map J half-down
-map K half-up
-map <c-y> up
-map <c-e> down
+# ------------------------------------------------------------------------------
+map gg       top
+map J        half-down
+map K        half-up
+map <c-y>    up
+map <c-e>    down
 
-map <m-1> open
-map <m-2> updir
-map <m-up> up
+# Mouse bindings
+map <m-1>    open
+map <m-2>    updir
+map <m-up>   up
 map <m-down> down
 
+# ------------------------------------------------------------------------------
 # Directory Shortcuts
-map gh cd ~/
-map gd cd ~/Downloads
-map gD cd ~/Documents
-map gp cd ~/Pictures
-map gm cd ~/Music
-map gcf cd ~/.config
-map glc cd ~/.local
+# ------------------------------------------------------------------------------
+map gh       cd ~/
+map gd       cd ~/Downloads
+map gD       cd ~/Documents
+map gp       cd ~/Pictures
+map gm       cd ~/Music
+map gcf      cd ~/.config
+map glc      cd ~/.local
 
-map gr cd /
-map gM cd /mnt
+map gr       cd /
+map gM       cd /mnt
