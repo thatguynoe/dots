@@ -183,13 +183,13 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- map buffer local keybindings when the language server attaches
 local servers = { 'bashls', 'pyright' }
 for _, lsp in ipairs(servers) do
-  require('lspconfig')[lsp].setup {
+  vim.lsp.config[lsp] = {
     on_attach = on_attach,
     capabilities = capabilities
   }
 end
 
-require('lspconfig').clangd.setup {
+vim.lsp.config['clangd'] = {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = {
@@ -198,7 +198,7 @@ require('lspconfig').clangd.setup {
   },
 }
 
-require('lspconfig').texlab.setup {
+vim.lsp.config['texlab'] = {
   on_attach = on_attach,
   capabilities = vim.tbl_extend('force', vim.lsp.protocol.make_client_capabilities(), ({
     textDocument = {
@@ -207,4 +207,7 @@ require('lspconfig').texlab.setup {
     }
   })),
 }
+
+vim.lsp.enable({ 'bashls', 'pyright', 'clangd', 'texlab' })
+
 END
