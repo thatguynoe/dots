@@ -57,5 +57,6 @@ nnoremap <Right> <C-w>>
 silent! nunmap grn
 silent! nunmap grr
 silent! nunmap gri
+silent! nunmap gra
+silent! nunmap grt
 silent! iunmap <C-s>
-silent! unmap gra
