@@ -11,10 +11,6 @@
 setopt autocd                   # Automatically cd into typed directory
 setopt PROMPT_SUBST             # Enable prompt substitution
 
-# History configuration
-setopt HIST_SAVE_NO_DUPS        # Don't save duplicate lines
-setopt HIST_IGNORE_DUPS         # Don't show duplicate lines in history
-
 # Terminal settings
 stty stop undef                 # Disable ctrl-s to freeze terminal
 zle_highlight=('paste:none')    # Don't highlight text when pasting
@@ -22,6 +18,9 @@ zle_highlight=('paste:none')    # Don't highlight text when pasting
 # ============================================================================
 # HISTORY SETTINGS
 # ============================================================================
+
+setopt HIST_SAVE_NO_DUPS        # Don't save duplicate lines
+setopt HIST_IGNORE_DUPS         # Don't show duplicate lines in history
 
 HISTSIZE=10000                                             # Lines in memory
 SAVEHIST=10000                                             # Lines to save
