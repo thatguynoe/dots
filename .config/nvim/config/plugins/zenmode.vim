@@ -2,7 +2,7 @@ lua << END
   require("zen-mode").setup {
     window = {
       backdrop = 1,
-      width = 80,
+      width = 84,
       height = 0.85,
     },
 
