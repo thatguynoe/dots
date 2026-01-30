@@ -149,6 +149,14 @@ bindkey '^e' edit-command-line                      # ctrl-e: Edit in vim
     source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
 
 # ============================================================================
+# ENVIRONMENT VARIABLES
+# ============================================================================
+
+if command -v pyenv 1>/dev/null 2>&1; then
+   eval "$(pyenv init - zsh)"
+fi
+
+# ============================================================================
 # PLUGINS (Load last for best compatibility)
 # ============================================================================
 
