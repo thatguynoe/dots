@@ -66,6 +66,11 @@ zmodload zsh/complist                   # Load completion list module
 compinit                                # Initialize completion
 _comp_options+=(globdots)               # Include hidden files in completion
 
+zstyle ':completion:*:processes' command 'NOCOLORS=1 ps -U $(whoami) | sed "/ps/d"'
+zstyle ':completion:*:processes' insert-ids menu yes select
+zstyle ':completion:*:processes-names' command 'NOCOLORS=1 ps xho command | sed "s/://g"'
+zstyle ':completion:*:processes' sort false
+
 # ============================================================================
 # VI MODE CONFIGURATION
 # ============================================================================
