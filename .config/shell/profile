@@ -14,6 +14,7 @@ export READER="zathura"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
 export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DM's.
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
@@ -33,6 +34,7 @@ export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
 export PARALLEL_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/parallel"
 export TEXMFVAR="${XDG_CACHE_HOME:-$HOME/.cache}/texlive/texmf-var"
 export TEXMFCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/texlive/texmf-config"
+export PYENV_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/pyenv"
 
 # Other program settings:
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
