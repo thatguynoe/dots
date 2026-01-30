@@ -2,7 +2,7 @@ local ts = require('nvim-treesitter')
 
 -- Install core parsers at startup
 ts.install({
-  "bash", "c", "cpp", "html", "doxygen", "latex", "lua", "markdown",
+  "bash", "c", "comment", "cpp", "html", "doxygen", "latex", "lua", "markdown",
   "markdown_inline", "python", "vim", "vimdoc", "yaml"
 })
 
@@ -41,8 +41,5 @@ vim.api.nvim_create_autocmd('FileType', {
     if vim.tbl_contains(allow_indent_filetypes, event.match) then
       vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
-
-    -- Install missing parsers (async, no-op if already installed)
-    ts.install({ lang })
   end,
 })
