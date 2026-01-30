@@ -52,6 +52,7 @@ export BAT_THEME="gruvbox-dark"
 export BAT_STYLE="plain"
 export LESSOPEN="| /usr/bin/bat --tabs 4 --color=always %s 2>/dev/null"
 export MOZ_WEBRENDER=1
+export MOZ_DBUS_REMOTE=1
 export PROMPT_EOL_MARK=''
 export _JAVA_AWT_WM_NONREPARENTING=1    # Fix for Java applications in dwm
 
