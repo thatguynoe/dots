@@ -83,4 +83,8 @@ return {
     s({ trig = "sc", name = "Small caps", dscr = "Insert small caps text" },
       fmta("\\textsc{<>}", { d(1, get_visual) })
     ),
+
+    s({ trig = "lua", name = "LuaLaTeX magic comment", dscr = "Insert LuaLaTeX program directive" },
+      t("%! TEX program = lualatex")
+    ),
 }
